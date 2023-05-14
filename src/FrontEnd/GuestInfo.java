@@ -19,6 +19,10 @@ public class GuestInfo {
         return something;
     }
     public static void setFullName(){
-
+    }
+    
+    public static String toString(int num){
+        String sNum = String.valueOf(num);
+        return sNum;
     }
 }

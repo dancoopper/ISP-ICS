@@ -15,6 +15,11 @@ public class Booking {
     }
 
     public static void bookSeat(String seatNum){
-        
+
+    }
+
+    public static String toString(int num){
+        String sNum = String.valueOf(num);
+        return sNum;
     }
 }

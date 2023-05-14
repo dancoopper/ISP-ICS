@@ -20,4 +20,9 @@ public class Cancellation {
         String[] something = {place};
         return something;
     }
+
+    public static String toString(int num){
+        String sNum = String.valueOf(num);
+        return sNum;
+    }
 }
