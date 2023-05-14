@@ -2,7 +2,7 @@ package FrontEnd;
 
 public class Cancellation {
 
-    public static void DisplayCancellation(){//this will diplay the GUI that will be used for cancelling a flight/ticket
+    public static void DisplayCancellation(){//this will diplay the GUI that will be used for cancelling a flight/tickeT
 
     }
 
