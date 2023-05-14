@@ -1,6 +1,11 @@
 package FrontEnd;
 
 public class Booking {
+    
+    public void Booking(){
+        
+    }
+
     public static void BookingScreen(){
 
     }
