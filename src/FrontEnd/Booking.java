@@ -15,6 +15,6 @@ public class Booking {
     }
 
     public static void bookSeat(String seatNum){
-
+        
     }
 }
