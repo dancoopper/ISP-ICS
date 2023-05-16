@@ -1,6 +1,9 @@
 package FrontEnd;
-
-public class Booking {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class Booking extends UI{
     
     public void Booking(){
         
