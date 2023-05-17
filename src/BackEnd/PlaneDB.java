@@ -57,7 +57,6 @@ public class PlaneDB {
             }
         }else{
             System.out.println("could not find plane number");
-            return;
         }
 
     }

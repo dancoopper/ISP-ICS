@@ -13,6 +13,7 @@ public class UI extends JFrame implements ActionListener {
     public void mainWindow(){
         setSize(500,300);
         setVisible(true);
+        setLayout(new GridLayout(4,0));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         GridLayout lay = new GridLayout(1,4);
 
