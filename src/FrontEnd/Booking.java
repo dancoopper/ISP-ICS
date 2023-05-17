@@ -3,14 +3,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class Booking extends UI{
+public class Booking{
     
     public void Booking(){
         
     }
 
     public static void BookingScreen(){
-
     }
 
     public static String[] FlightLoc(String loc){

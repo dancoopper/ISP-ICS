@@ -48,7 +48,7 @@ public class UI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String sE = e.getActionCommand();
         switch (sE) {
-            case "Book" -> System.out.println("went to booking");
+            case "Book" -> SwitchWindow("booking");
             case "Guest" -> System.out.println("went to Guest");
             case "Man" -> System.out.println("went to Manuel");
             case "Can" -> System.out.println("went to Cancel");
