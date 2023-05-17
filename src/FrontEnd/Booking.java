@@ -9,19 +9,16 @@ public class Booking{
         
     }
 
-    public static void BookingScreen(){
-    }
-
-    public static String[] FlightLoc(String loc){
+    public static String[] FlightLoc(String loc){//uses plane db
         String[] somthinG = {loc};
         return somthinG;
     }
 
     public static boolean PlaneAve(String planeName){
         return true;
-    }
+    }// gets from plane db
 
-    public static void bookSeat(String seatNum){
+    public static void bookSeat(String seatNum){//checks and then add to planedb and also people db
 
     }
 

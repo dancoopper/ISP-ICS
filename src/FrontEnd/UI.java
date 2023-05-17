@@ -59,4 +59,21 @@ public class UI extends JFrame implements ActionListener {
     public static void SwitchWindow(String whatWin){
 
     }
+
+
+    public static void BookingScreen(){
+
+    }
+
+    public static void DisplayManuel(){
+
+    }
+
+    public static void DisplayCancellation(){
+
+    }
+
+    public static void GuestInfo(){
+
+    }
 }

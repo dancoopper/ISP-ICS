@@ -2,9 +2,6 @@ package FrontEnd;
 
 public class Cancellation {
 
-    public static void DisplayCancellation(){//this will diplay the GUI that will be used for cancelling a flight/tickeT/people
-
-    }
 
     public static String[] SearchName(String Name){
         String[] something = {Name};
