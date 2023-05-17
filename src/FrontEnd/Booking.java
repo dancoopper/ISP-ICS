@@ -13,8 +13,8 @@ public class Booking{
     }
 
     public static String[] FlightLoc(String loc){
-        String[] somthing = {loc};
-        return somthing;
+        String[] somthinG = {loc};
+        return somthinG;
     }
 
     public static boolean PlaneAve(String planeName){
