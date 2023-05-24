@@ -62,7 +62,7 @@ public class PlaneDB {
     }
 
     public static String[] readFile(int witchPlane, String date){
-        String[] s = {"hh"};
+        String[] s = new String[10];
         return s;
     }
 }
