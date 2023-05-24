@@ -4,12 +4,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Ui.
+ */
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class UI extends JFrame implements ActionListener {
+    /**
+     * Instantiates a new Ui.
+     */
     public UI(){
         super("Fly Away Airlines");
     }
+
+    /**
+     * Main window.
+     */
     public void mainWindow(){
         setSize(500,300);
         setVisible(true);
@@ -56,23 +66,40 @@ public class UI extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Switch window.
+     *
+     * @param whatWin the what win
+     */
     public static void SwitchWindow(String whatWin){
 
     }
 
 
+    /**
+     * Booking screen.
+     */
     public static void BookingScreen(){
 
     }
 
+    /**
+     * Display manuel.
+     */
     public static void DisplayManuel(){
 
     }
 
+    /**
+     * Display cancellation.
+     */
     public static void DisplayCancellation(){
 
     }
 
+    /**
+     * Guest info.
+     */
     public static void GuestInfo(){
 
     }

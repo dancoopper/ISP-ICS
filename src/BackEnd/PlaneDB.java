@@ -4,12 +4,27 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * The type Plane db.
+ */
 public class PlaneDB {
+    /**
+     * To string string.
+     *
+     * @param num the num
+     * @return the string
+     */
     public static String toString(int num){
         String sNum = String.valueOf(num);
         return sNum;
     }
 
+    /**
+     * Wright to file.
+     *
+     * @param info       the info
+     * @param whichPlane the which plane
+     */
     public static void wrightToFile(String[] info, int whichPlane){
         if(whichPlane == 1) {
             try {
@@ -61,6 +76,13 @@ public class PlaneDB {
 
     }
 
+    /**
+     * Read file string [ ].
+     *
+     * @param witchPlane the witch plane
+     * @param date       the date
+     * @return the string [ ]
+     */
     public static String[] readFile(int witchPlane, String date){
         String[] s = new String[10];
         return s;
