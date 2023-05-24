@@ -1,12 +1,15 @@
 package FrontEnd;
 
+import BackEnd.PlaneDB;
+
 public class GuestInfo {
 
-    public static void sortFullName(){
-
+    public static void sortFullName(int plane, String date){
+        String[] list = PlaneDB.readFile(1, "24");
+        
     }
 
-    public static void sortSeatNum(){
+    public static void sortSeatNum(int plane, String date){
 
     }
 
