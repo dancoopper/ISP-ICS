@@ -1,8 +1,13 @@
 package BackEnd;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Scanner;
+
+
+//TODO fix the text file path name
+
 
 /**
  * The type Plane db.
@@ -84,7 +89,23 @@ public class PlaneDB {
      * @return the string [ ]
      */
     public static String[] readFile(int witchPlane, String date){
-        String[] s = new String[10];
+    String[] s = new String[10];
+    
+    try {
+        File fileObj = new File("src/BackEnd/PlaneFiles/testDB");
+        Scanner reader = new Scanner(fileObj);
+        int counter = 0;
+        while(reader.hasNextLine()){
+            String line = reader.nextLine();
+            s[counter] = line;
+            counter++;
+        }
+        reader.close();
+
+    } catch (FileNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
         return s;
     }
 }
