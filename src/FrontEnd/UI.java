@@ -69,7 +69,7 @@ public class UI extends JFrame implements ActionListener {
     /**
      * Switch window.
      *
-     * @param whatWin the what win
+     * @param whatWin the  window it is switching to
      */
     public static void SwitchWindow(String whatWin){
 

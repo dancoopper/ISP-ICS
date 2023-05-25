@@ -15,7 +15,7 @@ public class GuestInfo {
      * @param input2 the input 2
      * @return the boolean
      */
-    public boolean alphabeticalSort(String input1, String input2) {
+    public static boolean alphabeticalSort(String input1, String input2) {
         if (input1.charAt(0) > input2.charAt(1)) {
             return true;
         } else if (input1.charAt(0) == input2.charAt(0)) {
@@ -41,11 +41,20 @@ public class GuestInfo {
      * @param plane the plane
      * @param date  the date
      */
-    public static void sortFullName(int plane, String date) {
+    public static String[] sortFullName(int plane, String date) {
         String[] list = PlaneDB.readFile(1, "24");
+        String tempNameHolder = "";
         for(int i =0; i<list.length; i++){
-
+            if(i+1>list.length){
+                break;
+            }
+            if(!alphabeticalSort(list[i], list[i+1])){
+                tempNameHolder = list[i];
+                list[i] = list[i+1];
+                list[i+1] = tempNameHolder;
+            }
         }
+        return list;
     }
 
     /**
