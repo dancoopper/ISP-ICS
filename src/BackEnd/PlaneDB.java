@@ -55,16 +55,16 @@ public class PlaneDB {
             }
         }else if(whichPlane == 2){
             try {
-                File Obj = new File("PlaneData/P2_data.txt");
+                File Obj = new File("src/PlaneData/P2_data.txt");
                 if (Obj.createNewFile()) {
                     System.out.println("New File Made");
-                    FileWriter fWriter = new FileWriter("PlaneData/P2_data.txt");
+                    FileWriter fWriter = new FileWriter("/srcPlaneData/P2_data.txt");
                     for (int i = 0; i < info.length; i++) {
                         fWriter.write(info[i]);
                         fWriter.close();
                     }
                 } else {
-                    FileWriter fWriter = new FileWriter("PlaneData/P2_data.txt");
+                    FileWriter fWriter = new FileWriter("src/PlaneData/P2_data.txt");
                     for (int i = 0; i < info.length; i++) {
                         fWriter.write(info[i]);
                         fWriter.close();
@@ -92,7 +92,7 @@ public class PlaneDB {
     String[] s = new String[10];
     
     try {
-        File fileObj = new File("src/BackEnd/PlaneFiles/testDB");
+        File fileObj = new File("src/BackEnd/PlaneData/testDB");
         Scanner reader = new Scanner(fileObj);
         int counter = 0;
         while(reader.hasNextLine()){
