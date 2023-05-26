@@ -7,7 +7,7 @@ public class Main {
         //FrontEnd.UI mainObj = new UI();
         //mainObj.mainWindow();
 
-        String[] s =  PlaneDB.readFile(1, "test");
+        String[] s =  PlaneDB.readFile(1, 1);
         String[] p = PeopleDB.readFile(1,"something");
         System.out.println("PLANE DB");
         for(int i =0; i<s.length; i++){

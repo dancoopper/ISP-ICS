@@ -30,7 +30,7 @@ public class PeopleDB {
     }
 
 
-    public static String[] readFile(int witchPlane, String date){
+    public static String[] readFile(int witchPlane, int date){
         String[] s = new String[10];
 
         try {
@@ -38,6 +38,27 @@ public class PeopleDB {
             Scanner reader = new Scanner(fileObj);
             int counter = 0;
             while(reader.hasNextLine()){
+                String line = reader.nextLine();
+                s[counter] = line;
+                counter++;
+            }
+            reader.close();
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return s;
+    }
+
+    public static String[] readFile(int witchPlane, String name) {
+        String[] s = new String[4];
+
+        try {
+            File fileObj = new File("src/BackEnd/PlaneData/testDB");
+            Scanner reader = new Scanner(fileObj);
+            int counter = 0;
+            while (reader.hasNextLine()) {//TODO make it so that it starts and ends reading in the right group of info
                 String line = reader.nextLine();
                 s[counter] = line;
                 counter++;

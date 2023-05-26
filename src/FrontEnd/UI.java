@@ -21,6 +21,7 @@ public class UI extends JFrame implements ActionListener {
      * Main window.
      */
     public void mainWindow(){
+        removeAll();
         setSize(500,300);
         setVisible(true);
         setLayout(new GridLayout(4,0));
