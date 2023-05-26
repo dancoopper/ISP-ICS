@@ -32,8 +32,8 @@ public class PlaneDB {
      */
     public static void wrightToFile(String[] info, int whichPlane) {
         if (info.length != 7) {
-            UI.SwitchWindow("mainWin");
-
+            UI obj = new UI(1);
+            obj.SwitchWindow("mainWin");
             System.out.println("Failed to wright to file because arr was size " + info.length + " instead of size 7");
         }
 
@@ -105,7 +105,7 @@ public class PlaneDB {
             Scanner reader = new Scanner(fileObj);
             int counter = 0;
             while (reader.hasNextLine()) {//TODO make it so that it starts and ends reading in the right group of info
-                String line = reader.nextLine();
+                String line = reader.nextLine();//https://www.javatpoint.com/post/java-scanner-next-method
                 s[counter] = line;
                 counter++;
             }
@@ -118,26 +118,6 @@ public class PlaneDB {
         return s;
     }
 
-    public static String[] readFile(int witchPlane, String name) {
-        String[] s = new String[4];
-
-        try {
-            File fileObj = new File("src/BackEnd/PlaneData/testDB");
-            Scanner reader = new Scanner(fileObj);
-            int counter = 0;
-            while (reader.hasNextLine()) {//TODO make it so that it starts and ends reading in the right group of info
-                String line = reader.nextLine();
-                s[counter] = line;
-                counter++;
-            }
-            reader.close();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return s;
-    }
     public static ArrayList<String> readFile(int witchPlane) {
         ArrayList<String> list = new ArrayList<String>();
         try {

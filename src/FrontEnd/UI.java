@@ -16,7 +16,9 @@ public class UI extends JFrame implements ActionListener {
     public UI(){
         super("Fly Away Airlines");
     }
+    public UI(int n){
 
+    }
     /**
      * Main window.
      */
@@ -72,36 +74,48 @@ public class UI extends JFrame implements ActionListener {
      *
      * @param whatWin the  window it is switching to
      */
-    public static void SwitchWindow(String whatWin){
-
+    public void SwitchWindow(String whatWin){
+        switch (whatWin){
+            case "main": mainWindow();
+            break;
+            case "booking": BookingScreen();
+            break;
+            case "can": DisplayCancellation();
+            break;
+            case "man": DisplayManuel();
+            break;
+            case "guest": GuestInfo();
+            break;
+            default: mainWindow();
+        }
     }
 
 
     /**
      * Booking screen.
      */
-    public static void BookingScreen(){
+    public void BookingScreen(){
 
     }
 
     /**
      * Display manuel.
      */
-    public static void DisplayManuel(){
+    public void DisplayManuel(){
 
     }
 
     /**
      * Display cancellation.
      */
-    public static void DisplayCancellation(){
+    public void DisplayCancellation(){
 
     }
 
     /**
      * Guest info.
      */
-    public static void GuestInfo(){
+    public void GuestInfo(){
 
     }
 }
