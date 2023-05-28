@@ -5,8 +5,10 @@ import FrontEnd.UI;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
 
 
 /**
@@ -94,44 +96,108 @@ public class PlaneDB {
      * Read file string [ ].
      *
      * @param witchPlane the witch plane
-     * @param date       the date
      * @return the string [ ]
      */
-    public static String[] readFile(int witchPlane, int date) {
-        String[] s = new String[4];
+    public static String[] readFile(int witchPlane, int somehting) {
+        String[] s = new String[13];
 
         try {
             File fileObj = new File("src/BackEnd/PlaneData/testDB");
-            Scanner reader = new Scanner(fileObj);
-            int counter = 0;
-            while (reader.hasNextLine()) {//TODO make it so that it starts and ends reading in the right group of info
-                String line = reader.nextLine();//https://www.javatpoint.com/post/java-scanner-next-method
-                s[counter] = line;
-                counter++;
+            for (int i = 0; i < 13; i++) {
+                int math = (i * 13) + 2;
+                String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(3);
+
             }
-            reader.close();
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return s;
     }
 
-    public static ArrayList<String> readFile(int witchPlane) {
-        ArrayList<String> list = new ArrayList<String>();
-        try {
-            File fileObj = new File("src/BackEnd/PlaneData/testDB");
-            Scanner reader = new Scanner(fileObj);
+    /**
+     * Read file array list.
+     *
+     * @param flightNum the witch plane
+     * @return the array list
+     */
 
-            int counter = 0;
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                list.set(counter, line);
-                counter++;
+
+    public static String[] readFile(String flightNum) {
+        String[] list = new String[13];
+        HashMap<String , Integer> plane1Index = new HashMap<>();
+        plane1Index.put("101", 0);
+        plane1Index.put("102", 13);
+        plane1Index.put("103", 27);
+        plane1Index.put("104", 41);
+        plane1Index.put("105", 55);
+        plane1Index.put("106", 69);
+        plane1Index.put("107", 83);
+        plane1Index.put("108", 97);
+        plane1Index.put("109", 111);
+        plane1Index.put("110", 125);
+        plane1Index.put("111", 139);
+        plane1Index.put("112", 153);
+        plane1Index.put("113", 167);
+        plane1Index.put("114", 181);
+        plane1Index.put("115", 195);
+        plane1Index.put("116", 209);
+        plane1Index.put("117", 223);
+        plane1Index.put("118", 237);
+        plane1Index.put("119", 251);
+        plane1Index.put("120", 264);
+
+        HashMap<String, Integer> plane2Index = new HashMap<>();
+        plane2Index.put("201", 0);
+        plane2Index.put("202", 13);
+        plane2Index.put("203", 27);
+        plane2Index.put("204", 41);
+        plane2Index.put("205", 55);
+        plane2Index.put("206", 69);
+        plane2Index.put("207", 83);
+        plane2Index.put("208", 97);
+        plane2Index.put("209", 111);
+        plane2Index.put("210", 125);
+        plane2Index.put("211", 139);
+        plane2Index.put("212", 153);
+        plane2Index.put("213", 167);
+        plane2Index.put("214", 181);
+        plane2Index.put("215", 195);
+        plane2Index.put("216", 209);
+        plane2Index.put("217", 223);
+        plane2Index.put("218", 237);
+        plane2Index.put("219", 251);
+        plane2Index.put("220", 264);
+
+        try {
+            int nFlightNum= Integer.parseInt(flightNum);
+            File fileObj = new File("src/BackEnd/PlaneData/testDB");
+            if (nFlightNum < 121 && nFlightNum > 100) {
+                int counter = 0;
+                int val = plane1Index.get(flightNum);
+                for (int i = val; i < val + 13; i++) {
+                    String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(i);
+                    list[counter] = line;
+                    counter++;
+                }
+
+            } else if (nFlightNum < 221 && nFlightNum > 200) {
+                int counter = 0;
+                int val = plane2Index.get(flightNum);
+                for (int i = val; i < val + 13; i++) {
+                    String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(i);
+                    list[counter] = line;
+                    counter++;
+                }
             }
-            reader.close();
+
         } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
