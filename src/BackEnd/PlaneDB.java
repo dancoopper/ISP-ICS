@@ -40,7 +40,7 @@ public class PlaneDB {
         int planeTwo = 2;
 
         if (whichPlane == planeOne) {
-            String filePath = "src/BackEnd/PeopleData/testDB";
+            String filePath = "src/BackEnd/PeopleData/primary";
             try {
                 File Obj = new File(filePath);
                 if (Obj.createNewFile()) {
@@ -163,7 +163,7 @@ public class PlaneDB {
         String[] s = new String[13];
 
         try {
-            File fileObj = new File("src/BackEnd/PlaneData/testDB");
+            File fileObj = new File("src/BackEnd/PlaneData/primary");
             for (int i = 0; i < 13; i++) {
                 int math = (i * 13) + 2;
                 String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(3);
@@ -235,7 +235,7 @@ public class PlaneDB {
 
         try {
             int nFlightNum = Integer.parseInt(flightNum);
-            File fileObj = new File("src/BackEnd/PlaneData/testDB");
+            File fileObj = new File("src/BackEnd/PlaneData/primary");
             if (nFlightNum < 121 && nFlightNum > 100) {
                 int counter = 0;
                 int val = plane1Index.get(flightNum);
