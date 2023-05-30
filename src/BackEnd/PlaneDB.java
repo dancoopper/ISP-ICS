@@ -2,10 +2,7 @@ package BackEnd;
 
 import FrontEnd.UI;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -43,20 +40,84 @@ public class PlaneDB {
         int planeTwo = 2;
 
         if (whichPlane == planeOne) {
+            String filePath = "src/BackEnd/PeopleData/testDB";
             try {
-                File Obj = new File("src/PlaneData/P1_data.txt");
+                File Obj = new File(filePath);
                 if (Obj.createNewFile()) {
                     System.out.println("New File Made");
-                    FileWriter fWriter = new FileWriter("src/PlaneData/P1_data.txt");
-                    for (int i = 0; i < info.length; i++) {
-                        fWriter.write(info[i]);
+
+                    int lineNumber = 4;
+
+
+                    try {
+                        // Read the original file
+                        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+                        String line;
+                        StringBuilder content = new StringBuilder();
+                        String newContent = "";
+
+                        // Read the file line by line
+
+                        int currentLineNumber = 1;
+                        for (int i = 0; i < 13; i++) {
+                            newContent = info[i];
+                            while ((line = reader.readLine()) != null) {
+                                if (currentLineNumber == lineNumber) {
+                                    // Modify the desired line
+                                    content.append(newContent).append("\n");
+
+                                } else {
+                                    content.append(line).append("\n");
+                                }
+                                currentLineNumber++;
+                            }
+                            reader.close();
+
+                            // Write the modified content back to the file
+                            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                            writer.write(content.toString());
+                            writer.close();
+                            lineNumber++;
+                        }
+                        System.out.println("Successfully wrote to line " + lineNumber);
+                    } catch (IOException e) {
+                        System.out.println("An error occurred: " + e.getMessage());
                     }
-                    fWriter.close();
                 } else {
-                    FileWriter fWriter = new FileWriter("src/PlaneData/P1_data.txt");
-                    for (int i = 0; i < info.length; i++) {
-                        fWriter.write(info[i]);
-                        fWriter.close();
+                    int lineNumber = 4;
+                    try {
+                        // Read the original file
+                        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+                        String line;
+                        StringBuilder content = new StringBuilder();
+                        String newContent = "";
+
+                        // Read the file line by line
+
+                        int currentLineNumber = 1;
+                        for (int i = 0; i < 13; i++) {
+                            newContent = info[i];
+                            while ((line = reader.readLine()) != null) {
+                                if (currentLineNumber == lineNumber) {
+                                    // Modify the desired line
+                                    content.append(newContent).append("\n");
+
+                                } else {
+                                    content.append(line).append("\n");
+                                }
+                                currentLineNumber++;
+                            }
+                            reader.close();
+
+                            // Write the modified content back to the file
+                            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                            writer.write(content.toString());
+                            writer.close();
+                            lineNumber++;
+                        }
+                        System.out.println("Successfully wrote to line " + lineNumber);
+                    } catch (IOException e) {
+                        System.out.println("An error occurred: " + e.getMessage());
                     }
                 }
             } catch (Exception e) {
@@ -128,7 +189,7 @@ public class PlaneDB {
 
     public static String[] readFile(String flightNum) {
         String[] list = new String[13];
-        HashMap<String , Integer> plane1Index = new HashMap<>();
+        HashMap<String, Integer> plane1Index = new HashMap<>();
         plane1Index.put("101", 0);
         plane1Index.put("102", 13);
         plane1Index.put("103", 27);
@@ -173,7 +234,7 @@ public class PlaneDB {
         plane2Index.put("220", 264);
 
         try {
-            int nFlightNum= Integer.parseInt(flightNum);
+            int nFlightNum = Integer.parseInt(flightNum);
             File fileObj = new File("src/BackEnd/PlaneData/testDB");
             if (nFlightNum < 121 && nFlightNum > 100) {
                 int counter = 0;
