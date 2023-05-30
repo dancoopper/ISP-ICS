@@ -34,7 +34,7 @@ public class PeopleDB {
         String[] s = new String[10];
 
         try {
-            File fileObj = new File("src/BackEnd/PeopleData/testDB");
+            File fileObj = new File("src/BackEnd/PeopleData/primary");
             Scanner reader = new Scanner(fileObj);
             int counter = 0;
             while(reader.hasNextLine()){
@@ -55,7 +55,7 @@ public class PeopleDB {
         String[] s = new String[4];
 
         try {
-            File fileObj = new File("src/BackEnd/PlaneData/testDB");
+            File fileObj = new File("src/BackEnd/PlaneData/primary");
             Scanner reader = new Scanner(fileObj);
             int counter = 0;
             while (reader.hasNextLine()) {//TODO make it so that it starts and ends reading in the right group of info
