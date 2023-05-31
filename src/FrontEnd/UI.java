@@ -34,8 +34,8 @@ public class UI extends JFrame implements ActionListener {
 
         JPanel p1 = new JPanel();
         p1.setBackground(Color.BLUE);
-        //p1.setLayout(lay);
-        add(p1);
+        p1.setLayout(new FlowLayout());
+
 
         JPanel BIG = new JPanel();
         BIG.add(p1);
