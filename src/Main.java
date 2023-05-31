@@ -28,7 +28,7 @@ public class Main {
         for (int i = 0; i < test.length; i++) {
             System.out.println(test[i]);
         }
-*/
+
 
         String filePath = "src/BackEnd/PeopleData/testDB";
         int lineNumber = 4;
@@ -63,6 +63,9 @@ public class Main {
         } catch (IOException e) {
             System.out.println("An error occurred: " + e.getMessage());
         }
+*/
+        UI obj = new UI();
+        obj.mainWindow();
 
     }
 }

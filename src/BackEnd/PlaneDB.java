@@ -135,7 +135,7 @@ public class PlaneDB {
                 if (Obj.createNewFile()) {
                     System.out.println("New File Made");
                 }
-                int lineNumber = place + plane1Index.get(String.valueOf(whichPlane));
+                int lineNumber = place + plane2Index.get(String.valueOf(whichPlane));
 
 
                 try {
@@ -147,7 +147,7 @@ public class PlaneDB {
 
                     // Read the file line by line
 
-                    int currentLineNumber = plane1Index.get(String.valueOf(whichPlane));
+                    int currentLineNumber = plane2Index.get(String.valueOf(whichPlane));
 
 
                     while ((line = reader.readLine()) != null) {

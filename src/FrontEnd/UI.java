@@ -22,18 +22,25 @@ public class UI extends JFrame implements ActionListener {
     /**
      * Main window.
      */
+
+    public static JPanel p2 = new JPanel();
     public void mainWindow(){
-        removeAll();
         setSize(500,300);
         setVisible(true);
-        setLayout(new GridLayout(4,0));
+        setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        GridLayout lay = new GridLayout(1,4);
+        //GridLayout lay = new GridLayout(1,4);
+
 
         JPanel p1 = new JPanel();
         p1.setBackground(Color.BLUE);
-        p1.setLayout(lay);
+        //p1.setLayout(lay);
         add(p1);
+
+        JPanel BIG = new JPanel();
+        BIG.add(p1);
+        BIG.add(p2);
+        add(BIG);
 
         JButton b1 = new JButton("go to booking");
         b1.addActionListener(this);
@@ -61,10 +68,14 @@ public class UI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String sE = e.getActionCommand();
         switch (sE) {
-            case "Book" : System.out.println("went to Book");
+            case "Book" : BookingScreen();
+            break;
             case "Guest" : System.out.println("went to Guest");
-            case "Man" : System.out.println("went to Manuel");
+            break;
+            case "Man" : DisplayManuel();
+            break;
             case "Can" : System.out.println("went to Cancel");
+            break;
             default : System.out.println("something went wrong");
         }
     }
@@ -95,14 +106,14 @@ public class UI extends JFrame implements ActionListener {
      * Booking screen.
      */
     public void BookingScreen(){
-
+        p2.setBackground(Color.BLACK);
     }
 
     /**
      * Display manuel.
      */
     public void DisplayManuel(){
-
+        p2.setBackground(Color.GRAY);
     }
 
     /**
