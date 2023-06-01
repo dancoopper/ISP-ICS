@@ -190,11 +190,10 @@ public class PlaneDB {
      * Read file string [ ].
      *
      * @param flightNum the witch plane
-     * @param seatNum  the somehting
+     * @param seatNum   the somehting
      * @return the string [ ]
      */
     public static boolean isSeatBooked(String flightNum, int seatNum) {
-        String[] list = new String[13];
         HashMap<String, Integer> plane1Index = new HashMap<>();
         plane1Index.put("101", 0);
         plane1Index.put("102", 13);
@@ -244,14 +243,15 @@ public class PlaneDB {
             if (nFlightNum < 121 && nFlightNum > 100) {
                 File fileObj = new File("src/BackEnd/PlaneData/primary");
                 String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(seatNum);
-                if(line.charAt(line.length()) == 'y'){
-                    return false;
+                if(line.charAt(line.length()-1) == 'y'){
+                    return true;
                 }
             } else if (nFlightNum < 221 && nFlightNum > 200) {
                 File fileObj = new File("src/BackEnd/PlaneData/secondary");
-                String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(seatNum);
-                if(line.charAt(line.length()) == 'y'){
-                    return false;
+                int math = plane2Index.get(flightNum) + 2 + seatNum;
+                String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(math);
+                if(line.charAt(line.length()-1) == 'y'){
+                    return true;
                 }
             }
 
@@ -261,7 +261,7 @@ public class PlaneDB {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return true;
+        return false;
     }
 
 

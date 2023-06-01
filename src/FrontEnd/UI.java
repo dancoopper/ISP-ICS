@@ -1,4 +1,6 @@
 package FrontEnd;
+import BackEnd.PlaneDB;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -70,11 +72,11 @@ public class UI extends JFrame implements ActionListener {
         switch (sE) {
             case "Book" : BookingScreen();
             break;
-            case "Guest" : System.out.println("went to Guest");
+            case "Guest" : System.out.println(PlaneDB.isSeatBooked("201", 2));
             break;
             case "Man" : DisplayManuel();
             break;
-            case "Can" : System.out.println("went to Cancel");
+            case "Can" : System.out.println(PlaneDB.isSeatBooked("201", 6));
             break;
             default : System.out.println("something went wrong");
         }
