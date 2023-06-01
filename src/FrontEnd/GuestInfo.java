@@ -42,7 +42,7 @@ public class GuestInfo {
      * @param date  the date
      */
     public static String[] sortFullName(int plane, String date) {
-        String[] list = PlaneDB.readFile(1, 24);
+        String[] list = PlaneDB.readFile("220");
         String tempNameHolder = "";
         for(int i =0; i<list.length; i++){
             if(i+1>list.length){

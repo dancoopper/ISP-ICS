@@ -27,24 +27,24 @@ public class UI extends JFrame implements ActionListener {
     public void mainWindow(){
         setSize(500,300);
         setVisible(true);
-        setLayout(new FlowLayout());
+        //setLayout(new GridLayout(2,1));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //GridLayout lay = new GridLayout(1,4);
+        GridLayout lay = new GridLayout(2, 1);
 
 
         JPanel p1 = new JPanel();
         p1.setBackground(Color.BLUE);
-        //p1.setLayout(lay);
-        add(p1);
 
         JPanel BIG = new JPanel();
         BIG.add(p1);
         BIG.add(p2);
+        BIG.setLayout(lay);
         add(BIG);
 
         JButton b1 = new JButton("go to booking");
         b1.addActionListener(this);
         b1.setActionCommand("Book");
+        b1.setSize(20,10);
         p1.add(b1);
 
         JButton b2 = new JButton("go to guest");
