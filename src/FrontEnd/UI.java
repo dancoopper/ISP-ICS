@@ -43,10 +43,11 @@ public class UI extends JFrame implements ActionListener {
         BIG.setLayout(lay);
         add(BIG);
 
+
         JButton b1 = new JButton("go to booking");
         b1.addActionListener(this);
         b1.setActionCommand("Book");
-        b1.setSize(20,10);
+        //b1.setSize(20,10);
         p1.add(b1);
 
         JButton b2 = new JButton("go to guest");
@@ -72,11 +73,11 @@ public class UI extends JFrame implements ActionListener {
         switch (sE) {
             case "Book" : BookingScreen();
             break;
-            case "Guest" : System.out.println(PlaneDB.isSeatBooked("201", 2));
+            case "Guest" : System.out.println(PlaneDB.isSeatBooked("201", 2) + " gues");
             break;
             case "Man" : DisplayManuel();
             break;
-            case "Can" : System.out.println(PlaneDB.isSeatBooked("201", 6));
+            case "Can" : System.out.println(PlaneDB.bookSeat("201", 2) + " can");
             break;
             default : System.out.println("something went wrong");
         }
