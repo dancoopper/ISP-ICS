@@ -314,29 +314,45 @@ public class PlaneDB {
         plane2Index.put("219", 234);
         plane2Index.put("220", 247);
 
+        HashMap<String, Integer> planeAvailIndex = new HashMap<>();
+        plane2Index.put("201", 0);
+        plane2Index.put("202", 1);
+        plane2Index.put("203", 2);
+        plane2Index.put("204", 3);
+        plane2Index.put("205", 4);
+        plane2Index.put("206", 5);
+        plane2Index.put("207", 6);
+        plane2Index.put("208", 7);
+        plane2Index.put("209", 8);
+        plane2Index.put("210", 9);
+        plane2Index.put("211", 10);
+        plane2Index.put("212", 11);
+        plane2Index.put("213", 12);
+        plane2Index.put("214", 13);
+        plane2Index.put("215", 14);
+        plane2Index.put("216", 15);
+        plane2Index.put("217", 16);
+        plane2Index.put("218", 17);
+        plane2Index.put("219", 18);
+        plane2Index.put("220", 19);
+
         if (String.valueOf(flight).charAt(0) == '1') {
             try {
                 // Read the existing file
-                File file = new File("src/BackEnd/PlaneData/primary");
+                File file = new File("src/BackEnd/PlaneData/book_avail");
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 StringBuilder sb = new StringBuilder();
                 String line;
-               // int currentLineNumber = 0;
+                int currentLineNumber = 0;
 
-                int lineNumber = plane1Index.get(flight);
-                String[] flightLine = readFile(flight);
+                int lineNumber = planeAvailIndex.get(flight);
 
                 String newLine = "";
-                int counter = 0;
                 // Read each line and update the specified line
-                for (int currentLineNumber = 0; currentLineNumber < plane1Index.get(flight) + 13; currentLineNumber++) {
-                    line = br.readLine();
-                    if (currentLineNumber >= lineNumber && currentLineNumber < lineNumber + 14) {
-                        counter++;
-                        if (counter >= 2 && counter < 12) {
-                            newLine = flightLine[counter];
-                            newLine = newLine.replace('N', 'Y');
-                        }
+                while ((line = br.readLine()) != null) {
+                    currentLineNumber++;
+                    if (currentLineNumber == lineNumber) {
+                        newLine = "11";
                         sb.append(newLine).append(System.lineSeparator());
                     } else {
                         sb.append(line).append(System.lineSeparator());
@@ -348,13 +364,11 @@ public class PlaneDB {
                 FileWriter writer = new FileWriter(file);
                 writer.write(sb.toString());
                 writer.close();
-
-                System.out.println("Line " + lineNumber + " edited successfully.");
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        }else if(flight.charAt(0) == '2'){
+        } else if (flight.charAt(0) == '2') {
             try {
                 // Read the existing file
                 File file = new File("src/BackEnd/PlaneData/secondary");
@@ -369,9 +383,9 @@ public class PlaneDB {
                 String newLine = "";
                 int counter = 0;
                 // Read each line and update the specified line
-                while ((line = br.readLine())!=null){
+                while ((line = br.readLine()) != null) {
                     currentLineNumber++;
-                    if (currentLineNumber-2 >= lineNumber && currentLineNumber-2 < lineNumber + 10) {
+                    if (currentLineNumber - 2 >= lineNumber && currentLineNumber - 2 < lineNumber + 10) {
                         counter++;
                         if (counter >= 0 && counter < 12) {
                             newLine = flightLine[counter];
