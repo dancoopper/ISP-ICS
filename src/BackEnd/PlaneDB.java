@@ -2,10 +2,8 @@ package BackEnd;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * The type Plane db.
@@ -203,46 +201,48 @@ public class PlaneDB {
         plane2Index.put("218", 221);
         plane2Index.put("219", 234);
         plane2Index.put("220", 247);
-        
+
+        String[] seatsArr = {"A1", "A2", "B1", "B2", "C1", "C2", "E1", "E2"};
+
         int nFlightNum = Integer.parseInt(flightNum);
         if (nFlightNum < 121 && nFlightNum > 100) {
             try {
-            // Read the existing file
-            File file = new File("src/BackEnd/PlaneData/primary");
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            int currentLineNumber = 0;
-            
-            int lineNumber = seatNum + plane1Index.get(String.valueOf(flightNum));
-            String newLine = "";
+                // Read the existing file
+                File file = new File("src/BackEnd/PlaneData/primary");
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                int currentLineNumber = 0;
 
-            // Read each line and update the specified line
-            while ((line = br.readLine()) != null) {
-                currentLineNumber++;
-                if (currentLineNumber == lineNumber) {
-                    if(line.charAt((line.length()-1)) == 'N'){
-                        newLine = "Y";
-                    }else if(line.charAt((line.length()-1)) == 'Y'){
-                        newLine = "N";
+                int lineNumber = plane1Index.get(flightNum) + 2 + seatNum;
+                String newLine = "";
+
+                // Read each line and update the specified line
+                while ((line = br.readLine()) != null) {
+                    currentLineNumber++;
+                    if (currentLineNumber == lineNumber) {
+                        if (line.charAt((line.length() - 1)) == 'N') {
+                            newLine = seatsArr[seatNum] + ": Y";
+                        } else if (line.charAt((line.length() - 1)) == 'Y') {
+                            newLine = seatsArr[seatNum] + ": N";
+                        }
+                        sb.append(newLine).append(System.lineSeparator());
+                    } else {
+                        sb.append(line).append(System.lineSeparator());
                     }
-                    sb.append(newLine).append(System.lineSeparator());
-                } else {
-                    sb.append(line).append(System.lineSeparator());
                 }
+                br.close();
+
+                // Write the updated content back to the file
+                FileWriter writer = new FileWriter(file);
+                writer.write(sb.toString());
+                writer.close();
+
+                System.out.println("Line " + lineNumber + " edited successfully.");
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            br.close();
-
-            // Write the updated content back to the file
-            FileWriter writer = new FileWriter(file);
-            writer.write(sb.toString());
-            writer.close();
-
-            System.out.println("Line " + lineNumber + " edited successfully.");
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         } else if (nFlightNum < 221 && nFlightNum > 200) {
             int val = plane2Index.get(flightNum);
@@ -267,6 +267,132 @@ public class PlaneDB {
             }
         }
         return false;
+    }
+
+    public static void cancel(String flight) {
+        HashMap<String, Integer> plane1Index = new HashMap<>();
+        plane1Index.put("101", 0);
+        plane1Index.put("102", 13);
+        plane1Index.put("103", 26);
+        plane1Index.put("104", 39);
+        plane1Index.put("105", 52);
+        plane1Index.put("106", 65);
+        plane1Index.put("107", 78);
+        plane1Index.put("108", 91);
+        plane1Index.put("109", 104);
+        plane1Index.put("110", 117);
+        plane1Index.put("111", 130);
+        plane1Index.put("112", 143);
+        plane1Index.put("113", 156);
+        plane1Index.put("114", 169);
+        plane1Index.put("115", 182);
+        plane1Index.put("116", 195);
+        plane1Index.put("117", 208);
+        plane1Index.put("118", 221);
+        plane1Index.put("119", 234);
+        plane1Index.put("120", 247);
+
+        HashMap<String, Integer> plane2Index = new HashMap<>();
+        plane2Index.put("201", 0);
+        plane2Index.put("202", 13);
+        plane2Index.put("203", 26);
+        plane2Index.put("204", 39);
+        plane2Index.put("205", 52);
+        plane2Index.put("206", 65);
+        plane2Index.put("207", 78);
+        plane2Index.put("208", 91);
+        plane2Index.put("209", 104);
+        plane2Index.put("210", 117);
+        plane2Index.put("211", 130);
+        plane2Index.put("212", 143);
+        plane2Index.put("213", 156);
+        plane2Index.put("214", 169);
+        plane2Index.put("215", 182);
+        plane2Index.put("216", 195);
+        plane2Index.put("217", 208);
+        plane2Index.put("218", 221);
+        plane2Index.put("219", 234);
+        plane2Index.put("220", 247);
+
+        if (String.valueOf(flight).charAt(0) == '1') {
+            try {
+                // Read the existing file
+                File file = new File("src/BackEnd/PlaneData/primary");
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                StringBuilder sb = new StringBuilder();
+                String line;
+               // int currentLineNumber = 0;
+
+                int lineNumber = plane1Index.get(flight);
+                String[] flightLine = readFile(flight);
+
+                String newLine = "";
+                int counter = 0;
+                // Read each line and update the specified line
+                for (int currentLineNumber = 0; currentLineNumber < plane1Index.get(flight) + 13; currentLineNumber++) {
+                    line = br.readLine();
+                    if (currentLineNumber >= lineNumber && currentLineNumber < lineNumber + 14) {
+                        counter++;
+                        if (counter >= 2 && counter < 12) {
+                            newLine = flightLine[counter];
+                            newLine = newLine.replace('N', 'Y');
+                        }
+                        sb.append(newLine).append(System.lineSeparator());
+                    } else {
+                        sb.append(line).append(System.lineSeparator());
+                    }
+                }
+                br.close();
+
+                // Write the updated content back to the file
+                FileWriter writer = new FileWriter(file);
+                writer.write(sb.toString());
+                writer.close();
+
+                System.out.println("Line " + lineNumber + " edited successfully.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else if(flight.charAt(0) == '2'){
+            try {
+                // Read the existing file
+                File file = new File("src/BackEnd/PlaneData/secondary");
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                int currentLineNumber = 0;
+
+                int lineNumber = plane2Index.get(flight);
+                String[] flightLine = readFile(flight);
+
+                String newLine = "";
+                int counter = 0;
+                // Read each line and update the specified line
+                while ((line = br.readLine())!=null){
+                    currentLineNumber++;
+                    if (currentLineNumber-2 >= lineNumber && currentLineNumber-2 < lineNumber + 10) {
+                        counter++;
+                        if (counter >= 0 && counter < 12) {
+                            newLine = flightLine[counter];
+                            newLine = newLine.replace('Y', 'N');
+                            sb.append(newLine).append(System.lineSeparator());
+                        }
+                    } else {
+                        sb.append(line).append(System.lineSeparator());
+                    }
+                }
+                br.close();
+
+                // Write the updated content back to the file
+                FileWriter writer = new FileWriter(file);
+                writer.write(sb.toString());
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public static boolean isSeatBooked(String flightNum, int seatNum) {
@@ -320,14 +446,14 @@ public class PlaneDB {
                 File fileObj = new File("src/BackEnd/PlaneData/primary");
                 int math = plane1Index.get(flightNum) + 1 + seatNum;
                 String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(math);
-                if (line.charAt(line.length() - 1) == 'y') {
+                if (line.charAt(line.length() - 1) == 'Y') {
                     return true;
                 }
             } else if (nFlightNum < 221 && nFlightNum > 200) {
                 File fileObj = new File("src/BackEnd/PlaneData/secondary");
                 int math = plane2Index.get(flightNum) + 1 + seatNum;
                 String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(math);
-                if (line.charAt(line.length() - 1) == 'y') {
+                if (line.charAt(line.length() - 1) == 'Y') {
                     return true;
                 }
             }
@@ -395,21 +521,22 @@ public class PlaneDB {
 
         try {
             int nFlightNum = Integer.parseInt(flightNum);
-            File fileObj = new File("src/BackEnd/PlaneData/primary");
+            File fileObj1 = new File("src/BackEnd/PlaneData/primary");
             if (nFlightNum < 121 && nFlightNum > 100) {
                 int counter = 0;
                 int val = plane1Index.get(flightNum);
                 for (int i = val; i < val + 13; i++) {
-                    String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(i);
+                    String line = Files.readAllLines(Paths.get(String.valueOf(fileObj1))).get(i);
                     list[counter] = line;
                     counter++;
                 }
 
             } else if (nFlightNum < 221 && nFlightNum > 200) {
+                File fileObj2 = new File("src/BackEnd/PlaneData/secondary");
                 int counter = 0;
                 int val = plane2Index.get(flightNum);
                 for (int i = val; i < val + 13; i++) {
-                    String line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(i);
+                    String line = Files.readAllLines(Paths.get(String.valueOf(fileObj2))).get(i);
                     list[counter] = line;
                     counter++;
                 }
