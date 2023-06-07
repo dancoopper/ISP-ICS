@@ -2,6 +2,7 @@ package FrontEnd;
 import BackEnd.PlaneDB;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,18 +35,27 @@ public class UI extends JFrame implements ActionListener {
 
 
         JMenuBar mb = new JMenuBar();
-        JMenu booking, guest, manual, cancel;
-        JMenuItem ticketC, planeC;
+        //JButton booking, guest, manual;
+        JMenu cancel;
+        JMenuItem booking, guest, manual, ticketC, planeC;
 
-        booking = new JMenu("Book Ticket");
+        //Border emptyBorder = BorderFactory.createEmptyBorder();
+
+        booking = new JMenuItem("Book Ticket ");
+        //booking.setBackground(Color.WHITE);
+        //booking.setBorder(emptyBorder);
         booking.addActionListener(this);
         booking.setActionCommand("Book");
 
-        guest = new JMenu("Flight Info");
+        guest = new JMenuItem("Flight Info ");
+        //guest.setBackground(Color.WHITE);
+        //guest.setBorder(emptyBorder);
         guest.addActionListener(this);
         guest.setActionCommand("Guest");
 
-        manual = new JMenu("User Manual");
+        manual = new JMenuItem("User Manual ");
+        //manual.setBackground(Color.WHITE);
+        //manual.setBorder(emptyBorder);
         manual.addActionListener(this);
         manual.setActionCommand("Manual");
 
@@ -74,21 +84,32 @@ public class UI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String sE = e.getActionCommand();
 
-        switch (sE) {
-            case "Book" :
-                //BookingScreen();
-                System.out.println("hi");
-            break;
-            case "Guest" : System.out.println(PlaneDB.isSeatBooked("201", 2));
-            break;
-            case "Manual" : DisplayManuel();
-            break;
-            case "Cancel" : System.out.println(PlaneDB.isSeatBooked("201", 6));
-            break;
-            default : System.out.println("something went wrong");
+        if ( e.getActionCommand().equals("Book")) {
+            //BookingScreen();
+            p2.setBackground(Color.WHITE);
+            repaint();
+            System.out.println("hi");
+        } else if ( e.getActionCommand().equals("Guest")) {
+            p2.setBackground(Color.LIGHT_GRAY);
+            repaint();
+            System.out.println(PlaneDB.isSeatBooked("201", 2));
+        } else if ( e.getActionCommand().equals("Manual")) {
+            DisplayManuel();
+        } else if ( e.getActionCommand().equals("TicketCancel")) {
+            p2.setBackground(Color.WHITE);
+            repaint();
+            System.out.println("ticket cancel");
+        } else if ( e.getActionCommand().equals("FlightCancel")) {
+            p2.setBackground(Color.WHITE);
+            repaint();;
+            System.out.println("flight Cancel");
+        } else {
+            p2.setBackground(Color.WHITE);
+            repaint();
+            System.out.println("something went wrong");
         }
+
     }
 
 
