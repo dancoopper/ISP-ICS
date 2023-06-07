@@ -315,98 +315,84 @@ public class PlaneDB {
         plane2Index.put("220", 247);
 
         HashMap<String, Integer> planeAvailIndex = new HashMap<>();
-        plane2Index.put("201", 0);
-        plane2Index.put("202", 1);
-        plane2Index.put("203", 2);
-        plane2Index.put("204", 3);
-        plane2Index.put("205", 4);
-        plane2Index.put("206", 5);
-        plane2Index.put("207", 6);
-        plane2Index.put("208", 7);
-        plane2Index.put("209", 8);
-        plane2Index.put("210", 9);
-        plane2Index.put("211", 10);
-        plane2Index.put("212", 11);
-        plane2Index.put("213", 12);
-        plane2Index.put("214", 13);
-        plane2Index.put("215", 14);
-        plane2Index.put("216", 15);
-        plane2Index.put("217", 16);
-        plane2Index.put("218", 17);
-        plane2Index.put("219", 18);
-        plane2Index.put("220", 19);
+        planeAvailIndex.put("101", 1);
+        planeAvailIndex.put("102", 2);
+        planeAvailIndex.put("103", 99);
+        planeAvailIndex.put("104", 3);
+        planeAvailIndex.put("105", 4);
+        planeAvailIndex.put("106", 5);
+        planeAvailIndex.put("107", 6);
+        planeAvailIndex.put("108", 7);
+        planeAvailIndex.put("109", 8);
+        planeAvailIndex.put("110", 9);
+        planeAvailIndex.put("111", 10);
+        planeAvailIndex.put("112", 11);
+        planeAvailIndex.put("113", 12);
+        planeAvailIndex.put("114", 13);
+        planeAvailIndex.put("115", 14);
+        planeAvailIndex.put("116", 15);
+        planeAvailIndex.put("117", 16);
+        planeAvailIndex.put("118", 17);
+        planeAvailIndex.put("119", 18);
+        planeAvailIndex.put("120", 19);
+        planeAvailIndex.put("201", 20);
+        planeAvailIndex.put("202", 21);
+        planeAvailIndex.put("203", 22);
+        planeAvailIndex.put("204", 23);
+        planeAvailIndex.put("205", 24);
+        planeAvailIndex.put("206", 25);
+        planeAvailIndex.put("207", 26);
+        planeAvailIndex.put("208", 27);
+        planeAvailIndex.put("209", 28);
+        planeAvailIndex.put("210", 29);
+        planeAvailIndex.put("211", 30);
+        planeAvailIndex.put("212", 31);
+        planeAvailIndex.put("213", 32);
+        planeAvailIndex.put("214", 33);
+        planeAvailIndex.put("215", 34);
+        planeAvailIndex.put("216", 35);
+        planeAvailIndex.put("217", 36);
+        planeAvailIndex.put("218", 37);
+        planeAvailIndex.put("219", 38);
+        planeAvailIndex.put("220", 39);
 
-        if (String.valueOf(flight).charAt(0) == '1') {
-            try {
-                // Read the existing file
-                File file = new File("src/BackEnd/PlaneData/book_avail");
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                int currentLineNumber = 0;
 
-                int lineNumber = planeAvailIndex.get(flight);
+        try {
+            // Read the existing file
+            File file = new File("src/BackEnd/PlaneData/book_avail");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            int currentLineNumber = 0;
 
-                String newLine = "";
-                // Read each line and update the specified line
-                while ((line = br.readLine()) != null) {
-                    currentLineNumber++;
-                    if (currentLineNumber == lineNumber) {
-                        newLine = "11";
-                        sb.append(newLine).append(System.lineSeparator());
-                    } else {
-                        sb.append(line).append(System.lineSeparator());
+            int lineNumber = planeAvailIndex.get(flight);
+
+            String newLine = "";
+            // Read each line and update the specified line
+            while ((line = br.readLine()) != null) {
+                currentLineNumber++;
+                if (currentLineNumber == lineNumber && currentLineNumber < 40) {
+                    newLine = line;
+                    char[] cNew = newLine.toCharArray();
+                    cNew[newLine.length() - 1] = '-';
+                    newLine = "";
+                    for (int i = 0; i < cNew.length; i++) {
+                        newLine = newLine + cNew[i];
                     }
+                    sb.append(newLine).append(System.lineSeparator());
+                } else {
+                    sb.append(line).append(System.lineSeparator());
                 }
-                br.close();
-
-                // Write the updated content back to the file
-                FileWriter writer = new FileWriter(file);
-                writer.write(sb.toString());
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+            br.close();
 
-        } else if (flight.charAt(0) == '2') {
-            try {
-                // Read the existing file
-                File file = new File("src/BackEnd/PlaneData/secondary");
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                int currentLineNumber = 0;
-
-                int lineNumber = plane2Index.get(flight);
-                String[] flightLine = readFile(flight);
-
-                String newLine = "";
-                int counter = 0;
-                // Read each line and update the specified line
-                while ((line = br.readLine()) != null) {
-                    currentLineNumber++;
-                    if (currentLineNumber - 2 >= lineNumber && currentLineNumber - 2 < lineNumber + 10) {
-                        counter++;
-                        if (counter >= 0 && counter < 12) {
-                            newLine = flightLine[counter];
-                            newLine = newLine.replace('Y', 'N');
-                            sb.append(newLine).append(System.lineSeparator());
-                        }
-                    } else {
-                        sb.append(line).append(System.lineSeparator());
-                    }
-                }
-                br.close();
-
-                // Write the updated content back to the file
-                FileWriter writer = new FileWriter(file);
-                writer.write(sb.toString());
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            // Write the updated content back to the file
+            FileWriter writer = new FileWriter(file);
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
     public static boolean isSeatBooked(String flightNum, int seatNum) {
