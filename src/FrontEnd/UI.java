@@ -2,6 +2,7 @@ package FrontEnd;
 import BackEnd.PlaneDB;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,79 +30,73 @@ public class UI extends JFrame implements ActionListener {
     public void mainWindow(){
         setSize(500,300);
         setVisible(true);
-        //setLayout(new GridLayout(2,1));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        GridLayout lay = new GridLayout(2, 1);
+        setLayout(new GridLayout(1, 1));
 
 
-        JPanel p1 = new JPanel();
-        p1.setBackground(Color.BLUE);
-
-        JPanel BIG = new JPanel();
-        BIG.add(p1);
-        BIG.add(p2);
-        BIG.setLayout(lay);
-        add(BIG);
+        JMenuBar mb = new JMenuBar();
+        JMenu cancel;
+        JMenuItem booking, guest, manual, ticketC, planeC;
 
 
-        JButton b1 = new JButton("go to booking");
-        b1.addActionListener(this);
-        b1.setActionCommand("Book");
-        //b1.setSize(20,10);
-        p1.add(b1);
+        booking = new JMenuItem("Book Ticket ");
+        booking.addActionListener(this);
+        booking.setActionCommand("Book");
 
-        JButton b2 = new JButton("go to guest");
-        b2.addActionListener(this);
-        b2.setActionCommand("Guest");
-        p1.add(b2);
+        guest = new JMenuItem("Flight Info ");
+        guest.addActionListener(this);
+        guest.setActionCommand("Guest");
 
-        JButton b3 = new JButton("go to Manuel");
-        b3.addActionListener(this);
-        b3.setActionCommand("Man");
-        p1.add(b3);
+        manual = new JMenuItem("User Manual ");
+        manual.addActionListener(this);
+        manual.setActionCommand("Manual");
 
-        JButton b4 = new JButton("go to Cancel");
-        b4.addActionListener(this);
-        b4.setActionCommand("Can");
-        p1.add(b4);
+        cancel = new JMenu("Cancellations");
+        //cancel.addActionListener(this);
+        //cancel.setActionCommand("Cancel");
 
+        ticketC = new JMenuItem("Cancel Ticket");
+        ticketC.addActionListener(this);
+        ticketC.setActionCommand("TicketCancel");
+
+        planeC = new JMenuItem("Cancel Flight");
+        planeC.addActionListener(this);
+        planeC.setActionCommand("FlightCancel");
+
+
+        mb.add(booking);
+        mb.add(guest);
+        mb.add(manual);
+        mb.add(cancel);
+        cancel.add(ticketC);
+        cancel.add(planeC);
+        setJMenuBar(mb);
+        add(p2);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String sE = e.getActionCommand();
-        switch (sE) {
-            case "Book" : BookingScreen();
-            break;
-            case "Guest" : System.out.println(PlaneDB.isSeatBooked("201", 2) + " gues");
-            break;
-            case "Man" : DisplayManuel();
-            break;
-            case "Can" : System.out.println(PlaneDB.bookSeat("201", 2) + " can");
-            break;
-            default : System.out.println("something went wrong");
-        }
-    }
 
-    /**
-     * Switch window.
-     *
-     * @param whatWin the  window it is switching to
-     */
-    public void SwitchWindow(String whatWin){
-        switch (whatWin){
-            case "main": mainWindow();
-            break;
-            case "booking": BookingScreen();
-            break;
-            case "can": DisplayCancellation();
-            break;
-            case "man": DisplayManuel();
-            break;
-            case "guest": GuestInfo();
-            break;
-            default: mainWindow();
+        if ( e.getActionCommand().equals("Book")) {
+            BookingScreen();
+        } else if ( e.getActionCommand().equals("Guest")) {
+            GuestInfo();
+        } else if ( e.getActionCommand().equals("Manual")) {
+            DisplayManuel();
+        } else if ( e.getActionCommand().equals("TicketCancel")) {
+            p2.setBackground(Color.WHITE);
+            repaint();
+            System.out.println("ticket cancel");
+        } else if ( e.getActionCommand().equals("FlightCancel")) {
+            p2.setBackground(Color.WHITE);
+            repaint();;
+            System.out.println("flight Cancel");
+        } else {
+            p2.setBackground(Color.WHITE);
+            repaint();
+            System.out.println("something went wrong");
         }
+
     }
 
 
@@ -109,7 +104,38 @@ public class UI extends JFrame implements ActionListener {
      * Booking screen.
      */
     public void BookingScreen(){
+
         p2.setBackground(Color.BLACK);
+    }
+
+    /**
+     * Guest info.
+     */
+    public void GuestInfo(){
+        p2.setBackground(Color.WHITE);
+
+        //String flightcheck;
+        JLabel fc = new JLabel("What flight is being checked:");
+        JTextField ffield = new JTextField(3);
+
+        //int seatcheck;
+        JLabel sc = new JLabel("What seat number is being checked?");
+        JTextField stext = new JTextField(2);
+
+        //JButton
+
+        p2.add(fc);
+        p2.add(ffield);
+        p2.add(sc);
+        p2.add(stext);
+
+
+        //flightcheck = ffield.getText();
+        //String t = stext.getText();
+        //seatcheck = Integer.parseInt(t);
+        //repaint();
+
+        //System.out.println(PlaneDB.isSeatBooked(flightcheck,seatcheck));
     }
 
     /**
@@ -123,13 +149,6 @@ public class UI extends JFrame implements ActionListener {
      * Display cancellation.
      */
     public void DisplayCancellation(){
-
-    }
-
-    /**
-     * Guest info.
-     */
-    public void GuestInfo(){
 
     }
 }
