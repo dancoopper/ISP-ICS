@@ -42,6 +42,10 @@ public class UI extends JFrame implements ActionListener {
         boolean guestPan = false;
         boolean manualPan = false;
 
+        JPanel bookPanel = new JPanel();
+        JPanel guestPanel = new JPanel();
+        JPanel manualPanel = new JPanel();
+
 
         JMenuBar mb = new JMenuBar();
         JMenu bookings, guests, manuals, cancel;
