@@ -88,7 +88,6 @@ public class PlaneDB {
                 for (int i = 1; i < lnr.getLineNumber(); i++) {
                     bw.newLine();
                 }
-                bw.write("Hello World");
                 bw.close();
                 lnr.close();
             } catch (IOException e) {
@@ -96,7 +95,7 @@ public class PlaneDB {
             }
 
         } else if (whichPlane == planeTwo) {
-            String filePath = "src/BackEnd/PeopleData/testDB";
+            String filePath = "src/BackEnd/PeopleData/secondary";
             try {
                 File Obj = new File(filePath);
                 if (Obj.createNewFile()) {
@@ -277,44 +276,44 @@ public class PlaneDB {
         HashMap<String, Integer> planeAvailIndex = new HashMap<>();
         planeAvailIndex.put("101", 1);
         planeAvailIndex.put("102", 2);
-        planeAvailIndex.put("103", 99);
-        planeAvailIndex.put("104", 3);
-        planeAvailIndex.put("105", 4);
-        planeAvailIndex.put("106", 5);
-        planeAvailIndex.put("107", 6);
-        planeAvailIndex.put("108", 7);
-        planeAvailIndex.put("109", 8);
-        planeAvailIndex.put("110", 9);
-        planeAvailIndex.put("111", 10);
-        planeAvailIndex.put("112", 11);
-        planeAvailIndex.put("113", 12);
-        planeAvailIndex.put("114", 13);
-        planeAvailIndex.put("115", 14);
-        planeAvailIndex.put("116", 15);
-        planeAvailIndex.put("117", 16);
-        planeAvailIndex.put("118", 17);
-        planeAvailIndex.put("119", 18);
-        planeAvailIndex.put("120", 19);
-        planeAvailIndex.put("201", 20);
-        planeAvailIndex.put("202", 21);
-        planeAvailIndex.put("203", 22);
-        planeAvailIndex.put("204", 23);
-        planeAvailIndex.put("205", 24);
-        planeAvailIndex.put("206", 25);
-        planeAvailIndex.put("207", 26);
-        planeAvailIndex.put("208", 27);
-        planeAvailIndex.put("209", 28);
-        planeAvailIndex.put("210", 29);
-        planeAvailIndex.put("211", 30);
-        planeAvailIndex.put("212", 31);
-        planeAvailIndex.put("213", 32);
-        planeAvailIndex.put("214", 33);
-        planeAvailIndex.put("215", 34);
-        planeAvailIndex.put("216", 35);
-        planeAvailIndex.put("217", 36);
-        planeAvailIndex.put("218", 37);
-        planeAvailIndex.put("219", 38);
-        planeAvailIndex.put("220", 39);
+        planeAvailIndex.put("103", 3);
+        planeAvailIndex.put("104", 4);
+        planeAvailIndex.put("105", 5);
+        planeAvailIndex.put("106", 6);
+        planeAvailIndex.put("107", 7);
+        planeAvailIndex.put("108", 8);
+        planeAvailIndex.put("109", 9);
+        planeAvailIndex.put("110", 10);
+        planeAvailIndex.put("111", 11);
+        planeAvailIndex.put("112", 12);
+        planeAvailIndex.put("113", 13);
+        planeAvailIndex.put("114", 14);
+        planeAvailIndex.put("115", 15);
+        planeAvailIndex.put("116", 16);
+        planeAvailIndex.put("117", 17);
+        planeAvailIndex.put("118", 18);
+        planeAvailIndex.put("119", 19);
+        planeAvailIndex.put("120", 20);
+        planeAvailIndex.put("201", 21);
+        planeAvailIndex.put("202", 22);
+        planeAvailIndex.put("203", 23);
+        planeAvailIndex.put("204", 24);
+        planeAvailIndex.put("205", 25);
+        planeAvailIndex.put("206", 26);
+        planeAvailIndex.put("207", 27);
+        planeAvailIndex.put("208", 28);
+        planeAvailIndex.put("209", 29);
+        planeAvailIndex.put("210", 30);
+        planeAvailIndex.put("211", 31);
+        planeAvailIndex.put("212", 32);
+        planeAvailIndex.put("213", 33);
+        planeAvailIndex.put("214", 34);
+        planeAvailIndex.put("215", 35);
+        planeAvailIndex.put("216", 36);
+        planeAvailIndex.put("217", 37);
+        planeAvailIndex.put("218", 38);
+        planeAvailIndex.put("219", 39);
+        planeAvailIndex.put("220", 40);
 
 
         try {
