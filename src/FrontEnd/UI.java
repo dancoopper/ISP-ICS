@@ -21,6 +21,11 @@ public class UI extends JFrame implements ActionListener {
         super("Fly Away Airlines");
     }
 
+    /**
+     * Instantiates a new Ui.
+     *
+     * @param n the n
+     */
     public UI(int n) {
 
     }
@@ -28,12 +33,23 @@ public class UI extends JFrame implements ActionListener {
     /**
      * Main window.
      */
-
     public static JPanel p2 = new JPanel(); //default panel for blank screen
+    /**
+     * The Book panel.
+     */
     JPanel bookPanel = new JPanel();
+    /**
+     * The Guest panel.
+     */
     JPanel guestPanel = new JPanel();
+    /**
+     * The Manual panel.
+     */
     JPanel manualPanel = new JPanel();
 
+    /**
+     * Main window.
+     */
     public void mainWindow() {
         setSize(500, 300);
         setVisible(true);

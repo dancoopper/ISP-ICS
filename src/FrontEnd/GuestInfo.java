@@ -40,6 +40,7 @@ public class GuestInfo {
      *
      * @param plane the plane
      * @param date  the date
+     * @return the string [ ]
      */
     public static String[] sortFullName(int plane, String date) {
         String[] list = PlaneDB.readFile("220");
