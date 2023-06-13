@@ -1,6 +1,9 @@
 package FrontEnd;
 
 import javax.swing.*;
+
+import BackEnd.PeopleDB;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +38,12 @@ public class UI extends JFrame implements ActionListener {
 
     public void mainWindow() {
         setLayout(new GridLayout(1, 1));
-        setSize(600, 400);
+        Dimension screeDimension = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screeDimension.getWidth();
+        double hight = screeDimension.getHeight();
+        String sWidth =  String.valueOf(width);
+        String sHight =  String.valueOf(hight);
+        setSize(Integer.parseInt(sWidth),Integer.parseInt(sHight));
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         p2.add(new JLabel(new ImageIcon("src/FrontEnd/Splash.png"))); //adds splash screen
