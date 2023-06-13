@@ -143,6 +143,37 @@ public class UI extends JFrame implements ActionListener {
         repaint();
 
         p2.setBackground(Color.BLACK);
+
+
+        
+        //make textfeald here and make the output become one of the args in the booking method
+
+        JTextField flightInput = new JTextField();
+        JTextField seatInput = new JTextField();
+        
+        JTextField firstNameInput = new JTextField();
+        JTextField LastNameInput = new JTextField();
+        JTextField DOBInput = new JTextField();
+        JTextField AgeInput = new JTextField();
+        JTextField PhoneInput = new JTextField();
+        JTextField emailInput = new JTextField();
+
+        String flight = flightInput.toString();
+        String seat = seatInput.toString(); 
+        String[] infoArr = new String[6];// first name, last name, DOB, age, phone, email <- in that order
+
+        infoArr[0] = firstNameInput.toString();
+        infoArr[1] = LastNameInput.toString();
+        infoArr[2] = DOBInput.toString();
+        infoArr[3] = AgeInput.toString();
+        infoArr[4] = PhoneInput.toString();
+        infoArr[5] = emailInput.toString();
+
+
+       
+        PeopleDB.bookSeat(flight, seat, infoArr);
+
+
     }
 
     /**
@@ -165,7 +196,7 @@ public class UI extends JFrame implements ActionListener {
             JButton checkButton = new JButton("Check");
             checkButton.addActionListener(this);
 
-            String[] arr = PeopleDB.findFlightINfo("103");
+            String[] arr = PeopleDB.findFlightInfo("103");
 
 
             String info = "";//this is the info of the flight and seat number
