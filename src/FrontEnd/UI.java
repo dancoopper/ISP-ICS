@@ -36,24 +36,20 @@ public class UI extends JFrame implements ActionListener {
     JPanel guestPanel = new JPanel();
     JPanel manualPanel = new JPanel();
 
+    //booleans for each page
+    boolean bookPan = false;
+    boolean guestPan = false;
+    boolean manualPan = false;
+    boolean ticketCanPan = false;
+    boolean flightCanPan = false;
+
     public void mainWindow() {
         setLayout(new GridLayout(1, 1));
-        Dimension screeDimension = Toolkit.getDefaultToolkit().getScreenSize();
-        double width = screeDimension.getWidth();
-        double hight = screeDimension.getHeight();
-        String sWidth =  String.valueOf(width);
-        String sHight =  String.valueOf(hight);
-        setSize(Integer.parseInt(sWidth),Integer.parseInt(sHight));
+        setSize(1000, 800);
+        setResizable(false);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         p2.add(new JLabel(new ImageIcon("src/FrontEnd/Splash.png"))); //adds splash screen
-
-        //booleans for each page
-        boolean bookPan = false;
-        boolean guestPan = false;
-        boolean manualPan = false;
-
-
 
         JMenuBar mb = new JMenuBar();
         JMenu bookings, guests, manuals, cancel;
@@ -109,19 +105,26 @@ public class UI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("Book")) {
+            p2.removeAll();
+            p2.add(bookPanel);
+            bookPan = true;
             BookingScreen();
         } else if (e.getActionCommand().equals("Guest")) {
+            p2.removeAll();
+            p2.add(guestPanel);
+            guestPan = true;
             GuestInfo();
         } else if (e.getActionCommand().equals("Manual")) {
+            p2.removeAll();
+            p2.add(manualPanel);
+            manualPan = true;
             DisplayManual();
         } else if (e.getActionCommand().equals("TicketCancel")) {
-            repaint();
-            p2.setBackground(Color.WHITE);
-            System.out.println("ticket cancel");
+            ticketCanPan = true;
+            System.out.println("hi");
         } else if (e.getActionCommand().equals("FlightCancel")) {
-            repaint();
-            p2.setBackground(Color.WHITE);
-            System.out.println("flight Cancel");
+            flightCanPan = true;
+            System.out.println("hi");
         } else {
             p2.setBackground(Color.WHITE);
             repaint();
@@ -136,22 +139,61 @@ public class UI extends JFrame implements ActionListener {
      */
     public void BookingScreen() {
         repaint();
-
-        p2.setBackground(Color.BLACK);
-
-
-        
+        bookPanel.setLayout(new GridLayout(4, 1));
         //make textfeald here and make the output become one of the args in the booking method
+        JLabel flightIn = new JLabel("What is the flight number?");
+        JTextField flightInput = new JTextField(3);
+        JLabel seatIn = new JLabel("Which seat?");
+        JTextField seatInput = new JTextField(2);
 
-        JTextField flightInput = new JTextField();
-        JTextField seatInput = new JTextField();
-        
-        JTextField firstNameInput = new JTextField();
-        JTextField LastNameInput = new JTextField();
-        JTextField DOBInput = new JTextField();
-        JTextField AgeInput = new JTextField();
-        JTextField PhoneInput = new JTextField();
-        JTextField emailInput = new JTextField();
+        JLabel firstNameIn = new JLabel("First Name:");
+        JTextField firstNameInput = new JTextField(15);
+        JLabel lastNameIn = new JLabel("Last Name:");
+        JTextField LastNameInput = new JTextField(15);
+        JLabel dobIn = new JLabel("Date of birth, dd mm format:");
+        JTextField DOBInput = new JTextField(4);
+        JLabel ageIn = new JLabel("Age:");
+        JTextField AgeInput = new JTextField(3);
+        JLabel phoneIn = new JLabel("Phone number:");
+        JTextField PhoneInput = new JTextField(12);
+        JLabel emailIn = new JLabel("Email:");
+        JTextField emailInput = new JTextField(30);
+
+        JPanel bookPI = new JPanel();
+        JPanel bookNameI = new JPanel();
+        JPanel bookAgeI = new JPanel();
+        JPanel bookContactI = new JPanel();
+
+        bookPI.add(flightIn);
+        bookPI.add(flightInput);
+
+        bookPI.add(seatIn);
+        bookPI.add(seatInput);
+
+        bookNameI.add(firstNameIn);
+        bookNameI.add(firstNameInput);
+
+        bookNameI.add(lastNameIn);
+        bookNameI.add(LastNameInput);
+
+        bookAgeI.add(dobIn);
+        bookAgeI.add(DOBInput);
+
+        bookAgeI.add(ageIn);
+        bookAgeI.add(AgeInput);
+
+        bookContactI.add(phoneIn);
+        bookContactI.add(PhoneInput);
+
+        bookContactI.add(emailIn);
+        bookContactI.add(emailInput);
+        JButton bookOkay = new JButton("OKAY");
+        bookContactI.add(bookOkay);
+
+        bookPanel.add(bookPI);
+        bookPanel.add(bookNameI);
+        bookPanel.add(bookAgeI);
+        bookPanel.add(bookContactI);
 
         String flight = flightInput.toString();
         String seat = seatInput.toString(); 
@@ -165,10 +207,7 @@ public class UI extends JFrame implements ActionListener {
         infoArr[5] = emailInput.toString();
 
 
-       
         PeopleDB.bookSeat(flight, seat, infoArr);
-
-
     }
 
     /**
@@ -176,10 +215,7 @@ public class UI extends JFrame implements ActionListener {
      */
     public void GuestInfo() {
         repaint();
-        //JPanel guestPan = new JPanel();
-        //remove(p2);
-        //add(guestPan);
-        p2.setBackground(Color.WHITE);
+        guestPanel.setBackground(Color.WHITE);
 
         JLabel fc = new JLabel("What flight is being checked:");
         JTextField ffield = new JTextField(3);
@@ -188,9 +224,9 @@ public class UI extends JFrame implements ActionListener {
         checkButton.addActionListener(this);
 
 
-        p2.add(fc);
-        p2.add(ffield);
-        p2.add(checkButton);
+        guestPanel.add(fc);
+        guestPanel.add(ffield);
+        guestPanel.add(checkButton);
     }
 
 
@@ -199,9 +235,7 @@ public class UI extends JFrame implements ActionListener {
      */
     public void DisplayManual() {
         repaint();
-        remove(p2);
-        add(manualPanel);
-        manualPanel.setLayout(new GridLayout(6, 1));
+        manualPanel.setLayout(new FlowLayout());
 
         manualPanel.setBackground(Color.GRAY);
 
@@ -226,63 +260,60 @@ public class UI extends JFrame implements ActionListener {
 
         //title section
         manualTPan.setLayout(new FlowLayout());
-        JLabel manualTitle = new JLabel("FLY AWAY AIRLINES USER MANUAL");
+        JTextArea manualTitle = new JTextArea("FLY AWAY AIRLINES USER MANUAL");
         manualTPan.add(manualTitle);
-        //manualTPan.add(new JLabel(new ImageIcon("src/FrontEnd/Logo.png")));
+        manualTPan.add(new JLabel(new ImageIcon("src/FrontEnd/Logo.png")));
 
 
         //manual introduction
         manualIntroPan.setLayout(new FlowLayout());
-        JLabel introA = new JLabel("Hello! Welcome to the Fly-Away Airlines Booking Application. " +
-                "Below you will find explanations on each page and how to navigate the interface.");
-        JLabel introB = new JLabel("At any point in time, feel free to visit another page by using the menu at the top. " +
+        JTextArea introA = new JTextArea("Hello! Welcome to the Fly-Away Airlines Booking Application. " +
+                "Below you will find explanations on each page and how to navigate the interface." +
+                "At any point in time, feel free to visit another page by using the menu at the top. " +
                 "If for any reason the page doesn't load, try clicking the once more. Have fun booking!");
         manualIntroPan.add(introA);
-        manualIntroPan.add(introB);
+
 
         //manual booking
         manualBooking.setLayout(new FlowLayout());
-        JLabel bookA = new JLabel("*** WELCOME TO THE BOOKING EXPLANATION::");
-        JLabel bookB = new JLabel("The booking page allows the admin to book a ticket for the passenger in question.");
-        JLabel bookC = new JLabel("First you will be prompted 3 buttons with the destination you wish to travel to. " +
+        JTextArea bookA = new JTextArea("*** WELCOME TO THE BOOKING EXPLANATION::");
+        JTextArea bookB = new JTextArea("The booking page allows the admin to book a ticket for the passenger in question.");
+        JTextArea bookC = new JTextArea("First you will be prompted 3 buttons with the destination you wish to travel to. " +
                 "We fly round trips to Jamaica, Peru, and Norway using our 2 state of the art planes." +
-                "Every weekend there is at least one flight running to each destination, so your passengers have tons of flexibility.");
-        JLabel bookD = new JLabel("Once you've selected the destination for your passenger, you will be shown a calendar offering all availible flights" +
+                "Every weekend there is at least one flight running to each destination, so your passengers have tons of flexibility." +
+                "Once you've selected the destination for your passenger, you will be shown a calendar offering all availible flights" +
                 " to that location throughout the month of August 2023. Take a moment to ask the passenger which day they'd like to fly," +
-                " then select it by pressing the button shown on that day.");
-        JLabel bookE = new JLabel("Next you will be shown a list of all available seats on the selected flight. We have 5 rows A through E, " +
+                " then select it by pressing the button shown on that day." +
+                "Next you will be shown a list of all available seats on the selected flight. We have 5 rows A through E, " +
                 " and 2 seats per row. If a specific seat is not showing up, it has likely already been booked by another passenger.");
-        JLabel bookF = new JLabel(" Now that the flight and seat have been chosen, a screen will pop up allowing you to type in the passengers deatails." +
+        JTextArea bookD = new JTextArea(" Now that the flight and seat have been chosen, a screen will pop up allowing you to type in the passengers deatails." +
                 "Once you have filled all the fields, Press the button 'OKAY' to proceed. A screen will show up confirming the ticket was booked, " +
                 "and you will be returned to the main page.");
         manualBooking.add(bookA);
         manualBooking.add(bookB);
         manualBooking.add(bookC);
         manualBooking.add(bookD);
-        manualBooking.add(bookE);
-        manualBooking.add(bookF);
 
         //manual flight info
         manualGuest.setLayout(new FlowLayout());
-        JLabel tickInfoA = new JLabel(" *** WELCOME TO THE TICKET INFORMATION EXPLANATION::");
-        JLabel tickInfoB = new JLabel("The ticket information page allows the admin to view all available information on each ticket for a selected flight.");
-        JLabel tickInfoC = new JLabel("When you selected this page you will be asked what flight is being checked and prompted a textbox." +
-                "Please fill this field in by typing in the flight code of the flight you are retrieving information for, then press the 'OKAY' button to proceed");
-        JLabel tickInfoD = new JLabel("From here, a list will print out showing each seat, and who has booked that seat along with their information.");
+        JTextArea tickInfoA = new JTextArea(" *** WELCOME TO THE TICKET INFORMATION EXPLANATION::");
+        JTextArea tickInfoB = new JTextArea("The ticket information page allows the admin to view all available information on each ticket for a selected flight.");
+        JTextArea tickInfoC = new JTextArea("When you selected this page you will be asked what flight is being checked and prompted a textbox." +
+                "Please fill this field in by typing in the flight code of the flight you are retrieving information for, then press the 'OKAY' button to proceed" +
+                "From here, a list will print out showing each seat, and who has booked that seat along with their information.");
 
         manualGuest.add(tickInfoA);
         manualGuest.add(tickInfoB);
         manualGuest.add(tickInfoC);
-        manualGuest.add(tickInfoD);
 
         //ticket cancellation explanation
         manualCancelT.setLayout(new FlowLayout());
-        JLabel TCancelA = new JLabel(" *** WELCOME TO TICKET CANCELLATION:");
-        JLabel TCancelB = new JLabel("This page is used when a single passenger intends to cancel their ticket. They must provide their ticket information");
-        JLabel TCancelC = new JLabel("On this screen, two text boxes are provided, one for flight and one for seat on this flight." +
+        JTextArea TCancelA = new JTextArea(" *** WELCOME TO TICKET CANCELLATION:");
+        JTextArea TCancelB = new JTextArea("This page is used when a single passenger intends to cancel their ticket. They must provide their ticket information");
+        JTextArea TCancelC = new JTextArea("On this screen, two text boxes are provided, one for flight and one for seat on this flight." +
                 " In the flight box, please fill in the flight number of the ticket being cancelled. In the seat box, please fill in the seat number as [row][seat].");
-        JLabel TCancelD = new JLabel("An example of this would be --> Flight: 214, Seat: D1");
-        JLabel TCancelE = new JLabel("Once filled in, click 'OKAY' to proceed. A message should now pop up indicating that the ticket was successfully cancelled." +
+        JTextArea TCancelD = new JTextArea("An example of this would be --> Flight: 214, Seat: D1");
+        JTextArea TCancelE = new JTextArea("Once filled in, click 'OKAY' to proceed. A message should now pop up indicating that the ticket was successfully cancelled." +
                 " If the selected seat was never booked, a different message will pop up prompting you to select a new seat.");
 
         manualCancelT.add(TCancelA);
@@ -293,19 +324,19 @@ public class UI extends JFrame implements ActionListener {
 
         //plane cancellation explanation
         manualCancelF.setLayout(new FlowLayout());
-        JLabel FCancelA = new JLabel(" *** WELCOME TO FLIGHT CANCELLATION:");
-        JLabel FCancelB = new JLabel("This page is for when an entire flight needs to be cancelled. We must handle all the passengers on the flight.");
-        JLabel FCancelC = new JLabel("First you will be provided a box for flight. In this box, please provide the flight number." +
+        JTextArea FCancelA = new JTextArea(" *** WELCOME TO FLIGHT CANCELLATION:");
+        JTextArea FCancelB = new JTextArea("This page is for when an entire flight needs to be cancelled. We must handle all the passengers on the flight.");
+        JTextArea FCancelC = new JTextArea("First you will be provided a box for flight. In this box, please provide the flight number." +
                 " Once flight is found, all seats will show up in a list as well as passenger information for each flight." +
-                " Please use one of the buttons below this, to select if this information will sort alphabetically by passenger name, or by seat number");
-        JLabel FCancelD = new JLabel("Once you've made all your selections press 'OKAY' to proceed and the information will pop up as necessary." +
+                " Please use one of the buttons below this, to select if this information will sort alphabetically by passenger name, or by seat number" +
+                "Once you've made all your selections press 'OKAY' to proceed and the information will pop up as necessary." +
                 " Besisde each booked ticket will be a refund button and a rebook button. Determine what each passenger would like to do with their ticket." +
                 " If refund is clicked, a pop up will appear confirming the refund. If rebook is clicked, the second half of the screen will prompt you to rebook.");
 
         manualCancelF.add(FCancelA);
         manualCancelF.add(FCancelB);
         manualCancelF.add(FCancelC);
-        manualCancelF.add(FCancelD);
+
     }
 
 
