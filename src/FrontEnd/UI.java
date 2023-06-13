@@ -1,12 +1,11 @@
 package FrontEnd;
 
-import BackEnd.PlaneDB;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
 
 /**
  * The type Ui.
@@ -35,10 +34,11 @@ public class UI extends JFrame implements ActionListener {
     JPanel manualPanel = new JPanel();
 
     public void mainWindow() {
-        setSize(500, 300);
+        setLayout(new GridLayout(1, 1));
+        setSize(600, 400);
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new GridLayout(1, 1));
+        p2.add(new JLabel(new ImageIcon("src/FrontEnd/Splash.png"))); //adds splash screen
 
         //booleans for each page
         boolean bookPan = false;
@@ -145,32 +145,12 @@ public class UI extends JFrame implements ActionListener {
         JLabel fc = new JLabel("What flight is being checked:");
         JTextField ffield = new JTextField(3);
 
-        JLabel sc = new JLabel("What seat number is being checked?");
-        JTextField stext = new JTextField(2);
-
         JButton checkButton = new JButton("Check");
         checkButton.addActionListener(this);
-              /*
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String flightCheck = ffield.getText();
-                    int seatCheck = Integer.parseInt(stext.getText());
 
-                    boolean isSeatBooked = PlaneDB.isSeatBooked(flightCheck, seatCheck);
-                    if (isSeatBooked) {
-                        JOptionPane.showMessageDialog(UI.this, "The seat is booked.");
-                    } else {
-                        JOptionPane.showMessageDialog(UI.this, "The seat is not booked.");
-                    }
-                }
-
-            });
-               */
 
         p2.add(fc);
         p2.add(ffield);
-        p2.add(sc);
-        p2.add(stext);
         p2.add(checkButton);
     }
 
@@ -203,8 +183,10 @@ public class UI extends JFrame implements ActionListener {
         manualPanel.add(manualCancelF);
 
         //title section
-        JLabel manualTitle = new JLabel("Fly-Away Airlines User Manual");
+
+        JLabel manualTitle = new JLabel("FLY AWAY AIRLINES USER MANUAL");
         manualTPan.add(manualTitle);
+        //manualTPan.add(new JLabel(new ImageIcon("src/FrontEnd/Logo.png")));
 
         //manual introduction
         JLabel introA = new JLabel("Hello! Welcome to the Fly-Away Airlines Booking Application. " +
@@ -215,7 +197,7 @@ public class UI extends JFrame implements ActionListener {
         manualIntroPan.add(introB);
 
         //manual booking
-        JLabel bookA = new JLabel("*** Welcome to the booking explanation:");
+        JLabel bookA = new JLabel("*** WELCOME TO THE BOOKING EXPLANATION::");
         JLabel bookB = new JLabel("The booking page allows the admin to book a ticket for the passenger in question.");
         JLabel bookC = new JLabel("First you will be prompted 3 buttons with the destination you wish to travel to. " +
                 "We fly round trips to Jamaica, Peru, and Norway using our 2 state of the art planes." +
@@ -236,7 +218,7 @@ public class UI extends JFrame implements ActionListener {
         manualBooking.add(bookF);
 
         //manual flight info
-        JLabel tickInfoA = new JLabel(" *** Welcome to the the ticket information explanation:");
+        JLabel tickInfoA = new JLabel(" *** WELCOME TO THE TICKET INFORMATION EXPLANATION::");
         JLabel tickInfoB = new JLabel("The ticket information page allows the admin to view all available information on each ticket for a selected flight.");
         JLabel tickInfoC = new JLabel("When you selected this page you will be asked what flight is being checked and prompted a textbox." +
                 "Please fill this field in by typing in the flight code of the flight you are retrieving information for, then press the 'OKAY' button to proceed");
@@ -247,6 +229,22 @@ public class UI extends JFrame implements ActionListener {
         manualGuest.add(tickInfoC);
         manualGuest.add(tickInfoD);
 
+        //ticket cancellation explanation
+        JLabel TCancelA = new JLabel(" *** WELCOME TO TICKET CANCELLATION:");
+        JLabel TCancelB = new JLabel("This page is used when a single passenger intends to cancel their ticket. They should must provide their ticket number");
+        JLabel TCancelC = new JLabel("On this screen, two text boxes are provided, one for flight and one for seat on this flight." +
+                "In the flight box, please fill in the flight number of the ticket being cancelled. In the seat box, please fill in the seat number as [row][seat].");
+        JLabel TCancelD = new JLabel("An example of this would be --> Flight: 214, Seat: D1");
+        JLabel TCancelE = new JLabel("Once filled in, click 'OKAY' to proceed. A message should now pop up indicating that the ticket was successfully cancelled." +
+                "If the selected seat was never booked, a different message will pop up prompting you to select a new seat.");
+
+        manualCancelT.add(TCancelA);
+        manualCancelT.add(TCancelB);
+        manualCancelT.add(TCancelC);
+        manualCancelT.add(TCancelD);
+        manualCancelT.add(TCancelE);
+
+        //plane cancellation explanation
 
 
     }
