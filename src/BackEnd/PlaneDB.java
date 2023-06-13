@@ -222,7 +222,8 @@ public class PlaneDB {
                         if (line.charAt((line.length() - 1)) == 'N') {
                             newLine = seatsArr[seatNum] + ": Y";
                         } else if (line.charAt((line.length() - 1)) == 'Y') {
-                            newLine = seatsArr[seatNum] + ": N";
+                            System.out.println("seat was booked alredy");
+                            return false;
                         }
                         sb.append(newLine).append(System.lineSeparator());
                     } else {
@@ -243,23 +244,41 @@ public class PlaneDB {
             }
 
         } else if (nFlightNum < 221 && nFlightNum > 200) {
-            int val = plane2Index.get(flightNum);
-            int place = 1 + seatNum + val;
-            String line = "";
-            int lineNo;
             try {
-                File f = new File("src/BackEnd/PlaneData/secondary");
-                FileWriter fw = new FileWriter(f, true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                LineNumberReader lnr = new LineNumberReader(new FileReader(f));
-                lnr.setLineNumber(place);
-                for (int i = 1; i < lnr.getLineNumber(); i++) {
-                    bw.newLine();
-                }
-                bw.write("Hello World");
-                bw.close();
-                lnr.close();
+                // Read the existing file
+                File file = new File("src/BackEnd/PlaneData/secondary");
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                int currentLineNumber = 0;
 
+                int lineNumber = plane1Index.get(flightNum) + 2 + seatNum;
+                String newLine = "";
+
+                // Read each line and update the specified line
+                while ((line = br.readLine()) != null) {
+                    currentLineNumber++;
+                    if (currentLineNumber == lineNumber) {
+                        if (line.charAt((line.length() - 1)) == 'N') {
+                            newLine = seatsArr[seatNum] + ": Y";
+                        } else if (line.charAt((line.length() - 1)) == 'Y') {
+                            System.out.println("seat was booked alredy");
+                            return false;
+                        }
+                        sb.append(newLine).append(System.lineSeparator());
+                    } else {
+                        sb.append(line).append(System.lineSeparator());
+                    }
+                }
+                br.close();
+
+                // Write the updated content back to the file
+                FileWriter writer = new FileWriter(file);
+                writer.write(sb.toString());
+                writer.close();
+
+                System.out.println("Line " + lineNumber + " edited successfully.");
+                return true;
             } catch (IOException e) {
                 e.printStackTrace();
             }

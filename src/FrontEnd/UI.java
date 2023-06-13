@@ -4,7 +4,6 @@ import BackEnd.PeopleDB;
 import BackEnd.PlaneDB;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -170,9 +169,9 @@ public class UI extends JFrame implements ActionListener {
         infoArr[5] = emailInput.toString();
 
 
-       
+       if(PlaneDB.isSeatBooked(flight, Integer.parseInt(seat)) == true){
         PeopleDB.bookSeat(flight, seat, infoArr);
-
+       }
 
     }
 
@@ -230,15 +229,15 @@ public class UI extends JFrame implements ActionListener {
 
         manualPanel.setBackground(Color.GRAY);
 
-        // sections of manual
-        JPanel manualTPan = new JPanel(); // title panel for manual
-        JPanel manualIntroPan = new JPanel(); // intro panel for manual
-        JPanel manualBooking = new JPanel(); // booking explanation panel for manual
-        JPanel manualGuest = new JPanel(); // ticket information explanation panel for manual
-        JPanel manualCancelT = new JPanel(); // ticket cancellation panel for manual
-        JPanel manualCancelF = new JPanel(); // flight cancellation panel for manual
+        //sections of manual
+        JPanel manualTPan = new JPanel(); //title panel for manual
+        JPanel manualIntroPan = new JPanel(); //intro panel for manual
+        JPanel manualBooking = new JPanel(); //booking explanation panel for manual
+        JPanel manualGuest = new JPanel(); //ticket information explanation panel for manual
+        JPanel manualCancelT = new JPanel(); //ticket cancellation panel for manual
+        JPanel manualCancelF = new JPanel(); //flight cancellation panel for manual
 
-        // adding sections
+        //adding sections
         manualPanel.add(manualTPan);
         manualPanel.add(manualIntroPan);
         manualPanel.add(manualBooking);
@@ -246,41 +245,34 @@ public class UI extends JFrame implements ActionListener {
         manualPanel.add(manualCancelT);
         manualPanel.add(manualCancelF);
 
-        // title section
-        JLabel manualTitle = new JLabel("Fly-Away Airlines User Manual");
-        manualTPan.add(manualTitle);
+        //title section
 
-        // manual introduction
+        JLabel manualTitle = new JLabel("FLY AWAY AIRLINES USER MANUAL");
+        manualTPan.add(manualTitle);
+        //manualTPan.add(new JLabel(new ImageIcon("src/FrontEnd/Logo.png")));
+
+        //manual introduction
         JLabel introA = new JLabel("Hello! Welcome to the Fly-Away Airlines Booking Application. " +
                 "Below you will find explanations on each page and how to navigate the interface.");
-        JLabel introB = new JLabel(
-                "At any point in time, feel free to visit another page by using the menu at the top. " +
-                        "If for any reason the page doesn't load, try clicking the once more. Have fun booking!");
+        JLabel introB = new JLabel("At any point in time, feel free to visit another page by using the menu at the top. " +
+                "If for any reason the page doesn't load, try clicking the once more. Have fun booking!");
         manualIntroPan.add(introA);
         manualIntroPan.add(introB);
 
-        // manual booking
-        JLabel bookA = new JLabel("*** Welcome to the booking explanation:");
+        //manual booking
+        JLabel bookA = new JLabel("*** WELCOME TO THE BOOKING EXPLANATION::");
         JLabel bookB = new JLabel("The booking page allows the admin to book a ticket for the passenger in question.");
         JLabel bookC = new JLabel("First you will be prompted 3 buttons with the destination you wish to travel to. " +
                 "We fly round trips to Jamaica, Peru, and Norway using our 2 state of the art planes." +
                 "Every weekend there is at least one flight running to each destination, so your passengers have tons of flexibility.");
-        JLabel bookD = new JLabel(
-                "Once you've selected the destination for your passenger, you will be shown a calendar offering all availible flights"
-                        +
-                        " to that location throughout the month of August 2023. Take a moment to ask the passenger which day they'd like to fly,"
-                        +
-                        " then select it by pressing the button shown on that day.");
-        JLabel bookE = new JLabel(
-                "Next you will be shown a list of all available seats on the selected flight. We have 5 rows A through E, "
-                        +
-                        " and 2 seats per row. If a specific seat is not showing up, it has likely already been booked by another passenger.");
-        JLabel bookF = new JLabel(
-                " Now that the flight and seat have been chosen, a screen will pop up allowing you to type in the passengers deatails."
-                        +
-                        "Once you have filled all the fields, Press the button 'OKAY' to proceed. A screen will show up confirming the ticket was booked, "
-                        +
-                        "and you will be returned to the main page.");
+        JLabel bookD = new JLabel("Once you've selected the destination for your passenger, you will be shown a calendar offering all availible flights" +
+                " to that location throughout the month of August 2023. Take a moment to ask the passenger which day they'd like to fly," +
+                " then select it by pressing the button shown on that day.");
+        JLabel bookE = new JLabel("Next you will be shown a list of all available seats on the selected flight. We have 5 rows A through E, " +
+                " and 2 seats per row. If a specific seat is not showing up, it has likely already been booked by another passenger.");
+        JLabel bookF = new JLabel(" Now that the flight and seat have been chosen, a screen will pop up allowing you to type in the passengers deatails." +
+                "Once you have filled all the fields, Press the button 'OKAY' to proceed. A screen will show up confirming the ticket was booked, " +
+                "and you will be returned to the main page.");
         manualBooking.add(bookA);
         manualBooking.add(bookB);
         manualBooking.add(bookC);
@@ -288,27 +280,69 @@ public class UI extends JFrame implements ActionListener {
         manualBooking.add(bookE);
         manualBooking.add(bookF);
 
-        // manual flight info
-        JLabel tickInfoA = new JLabel(" *** Welcome to the the ticket information explanation:");
-        JLabel tickInfoB = new JLabel(
-                "The ticket information page allows the admin to view all available information on each ticket for a selected flight.");
-        JLabel tickInfoC = new JLabel(
-                "When you selected this page you will be asked what flight is being checked and prompted a textbox." +
-                        "Please fill this field in by typing in the flight code of the flight you are retrieving information for, then press the 'OKAY' button to proceed");
-        JLabel tickInfoD = new JLabel(
-                "From here, a list will print out showing each seat, and who has booked that seat along with their information.");
+        //manual flight info
+        JLabel tickInfoA = new JLabel(" *** WELCOME TO THE TICKET INFORMATION EXPLANATION::");
+        JLabel tickInfoB = new JLabel("The ticket information page allows the admin to view all available information on each ticket for a selected flight.");
+        JLabel tickInfoC = new JLabel("When you selected this page you will be asked what flight is being checked and prompted a textbox." +
+                "Please fill this field in by typing in the flight code of the flight you are retrieving information for, then press the 'OKAY' button to proceed");
+        JLabel tickInfoD = new JLabel("From here, a list will print out showing each seat, and who has booked that seat along with their information.");
 
         manualGuest.add(tickInfoA);
         manualGuest.add(tickInfoB);
         manualGuest.add(tickInfoC);
         manualGuest.add(tickInfoD);
 
+        //ticket cancellation explanation
+        JLabel TCancelA = new JLabel(" *** WELCOME TO TICKET CANCELLATION:");
+        JLabel TCancelB = new JLabel("This page is used when a single passenger intends to cancel their ticket. They should must provide their ticket number");
+        JLabel TCancelC = new JLabel("On this screen, two text boxes are provided, one for flight and one for seat on this flight." +
+                "In the flight box, please fill in the flight number of the ticket being cancelled. In the seat box, please fill in the seat number as [row][seat].");
+        JLabel TCancelD = new JLabel("An example of this would be --> Flight: 214, Seat: D1");
+        JLabel TCancelE = new JLabel("Once filled in, click 'OKAY' to proceed. A message should now pop up indicating that the ticket was successfully cancelled." +
+                "If the selected seat was never booked, a different message will pop up prompting you to select a new seat.");
+
+        manualCancelT.add(TCancelA);
+        manualCancelT.add(TCancelB);
+        manualCancelT.add(TCancelC);
+        manualCancelT.add(TCancelD);
+        manualCancelT.add(TCancelE);
+
+        //plane cancellation explanation
+
+
     }
+
 
     /**
      * Display cancellation.
      */
     public void DisplayCancellation() {
-
+        //ticket cancel 
+        JTextField flightNumber = new JTextField();
+        
+        
+        String flight = "";
+        String sFlightNum = flightNumber.toString();
+        if(Integer.parseInt(sFlightNum)<101|| Integer.parseInt(sFlightNum)>120&&Integer.parseInt(sFlightNum)<201||Integer.parseInt(sFlightNum)>220){
+            System.out.println("THAT IS NOT A FLIGHT NUMBER");
+        }else{
+            flight = flightNumber.toString();
+        }
+        
+        JTextField seatNumber = new JTextField();
+        
+        String seat = "";
+        String sSeatNum = seatNumber.toString();
+        if(sSeatNum.length()> 2){
+            seat = "";
+        }else if(((int)seatNumber.toString().charAt(1)) >2){
+            seat = "";
+        }else if(seatNumber.toString().charAt(0) != 'A'||seatNumber.toString().charAt(0) != 'B'||seatNumber.toString().charAt(0) != 'C'||seatNumber.toString().charAt(0) != 'E'){
+            seat="";
+        }else{
+            seat= seatNumber.toString();
+        }
+        
+        PeopleDB.canncelSeat(flight, seat);
     }
 }
