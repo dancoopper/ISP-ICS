@@ -176,19 +176,24 @@ public class UI extends JFrame implements ActionListener {
 
         //adding sections
         manualPanel.add(manualTPan);
+        manualTPan.setBackground(Color.PINK);
         manualPanel.add(manualIntroPan);
         manualPanel.add(manualBooking);
+        manualBooking.setBackground(Color.PINK);
         manualPanel.add(manualGuest);
         manualPanel.add(manualCancelT);
+        manualCancelT.setBackground(Color.PINK);
         manualPanel.add(manualCancelF);
 
         //title section
-
+        manualTPan.setLayout(new FlowLayout());
         JLabel manualTitle = new JLabel("FLY AWAY AIRLINES USER MANUAL");
         manualTPan.add(manualTitle);
         //manualTPan.add(new JLabel(new ImageIcon("src/FrontEnd/Logo.png")));
 
+
         //manual introduction
+        manualIntroPan.setLayout(new FlowLayout());
         JLabel introA = new JLabel("Hello! Welcome to the Fly-Away Airlines Booking Application. " +
                 "Below you will find explanations on each page and how to navigate the interface.");
         JLabel introB = new JLabel("At any point in time, feel free to visit another page by using the menu at the top. " +
@@ -197,6 +202,7 @@ public class UI extends JFrame implements ActionListener {
         manualIntroPan.add(introB);
 
         //manual booking
+        manualBooking.setLayout(new FlowLayout());
         JLabel bookA = new JLabel("*** WELCOME TO THE BOOKING EXPLANATION::");
         JLabel bookB = new JLabel("The booking page allows the admin to book a ticket for the passenger in question.");
         JLabel bookC = new JLabel("First you will be prompted 3 buttons with the destination you wish to travel to. " +
@@ -218,6 +224,7 @@ public class UI extends JFrame implements ActionListener {
         manualBooking.add(bookF);
 
         //manual flight info
+        manualGuest.setLayout(new FlowLayout());
         JLabel tickInfoA = new JLabel(" *** WELCOME TO THE TICKET INFORMATION EXPLANATION::");
         JLabel tickInfoB = new JLabel("The ticket information page allows the admin to view all available information on each ticket for a selected flight.");
         JLabel tickInfoC = new JLabel("When you selected this page you will be asked what flight is being checked and prompted a textbox." +
@@ -230,13 +237,14 @@ public class UI extends JFrame implements ActionListener {
         manualGuest.add(tickInfoD);
 
         //ticket cancellation explanation
+        manualCancelT.setLayout(new FlowLayout());
         JLabel TCancelA = new JLabel(" *** WELCOME TO TICKET CANCELLATION:");
-        JLabel TCancelB = new JLabel("This page is used when a single passenger intends to cancel their ticket. They should must provide their ticket number");
+        JLabel TCancelB = new JLabel("This page is used when a single passenger intends to cancel their ticket. They must provide their ticket information");
         JLabel TCancelC = new JLabel("On this screen, two text boxes are provided, one for flight and one for seat on this flight." +
-                "In the flight box, please fill in the flight number of the ticket being cancelled. In the seat box, please fill in the seat number as [row][seat].");
+                " In the flight box, please fill in the flight number of the ticket being cancelled. In the seat box, please fill in the seat number as [row][seat].");
         JLabel TCancelD = new JLabel("An example of this would be --> Flight: 214, Seat: D1");
         JLabel TCancelE = new JLabel("Once filled in, click 'OKAY' to proceed. A message should now pop up indicating that the ticket was successfully cancelled." +
-                "If the selected seat was never booked, a different message will pop up prompting you to select a new seat.");
+                " If the selected seat was never booked, a different message will pop up prompting you to select a new seat.");
 
         manualCancelT.add(TCancelA);
         manualCancelT.add(TCancelB);
@@ -245,8 +253,20 @@ public class UI extends JFrame implements ActionListener {
         manualCancelT.add(TCancelE);
 
         //plane cancellation explanation
+        manualCancelF.setLayout(new FlowLayout());
+        JLabel FCancelA = new JLabel(" *** WELCOME TO FLIGHT CANCELLATION:");
+        JLabel FCancelB = new JLabel("This page is for when an entire flight needs to be cancelled. We must handle all the passengers on the flight.");
+        JLabel FCancelC = new JLabel("First you will be provided a box for flight. In this box, please provide the flight number." +
+                " Once flight is found, all seats will show up in a list as well as passenger information for each flight." +
+                " Please use one of the buttons below this, to select if this information will sort alphabetically by passenger name, or by seat number");
+        JLabel FCancelD = new JLabel("Once you've made all your selections press 'OKAY' to proceed and the information will pop up as necessary." +
+                " Besisde each booked ticket will be a refund button and a rebook button. Determine what each passenger would like to do with their ticket." +
+                " If refund is clicked, a pop up will appear confirming the refund. If rebook is clicked, the second half of the screen will prompt you to rebook.");
 
-
+        manualCancelF.add(FCancelA);
+        manualCancelF.add(FCancelB);
+        manualCancelF.add(FCancelC);
+        manualCancelF.add(FCancelD);
     }
 
     /**
