@@ -22,8 +22,8 @@ public class Main {
          * email: +7
          */
 
-         String[] info = {"bob", "last", "05/7/2005", "6", "647-222-2222", "google@google.com"};
-         PeopleDB.bookSeat("203", "C2", info);
-
+         //String[] info = {"bob", "last", "05/7/2005", "6", "647-222-2222", "google@google.com"};
+         //PeopleDB.bookSeat("203", "C2", info);
+        PeopleDB.canncelSeat("203", "C2");
     }
 }

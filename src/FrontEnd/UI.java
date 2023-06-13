@@ -1,6 +1,9 @@
 package FrontEnd;
 
 import javax.swing.*;
+
+import BackEnd.PeopleDB;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +38,12 @@ public class UI extends JFrame implements ActionListener {
 
     public void mainWindow() {
         setLayout(new GridLayout(1, 1));
-        setSize(600, 400);
+        Dimension screeDimension = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screeDimension.getWidth();
+        double hight = screeDimension.getHeight();
+        String sWidth =  String.valueOf(width);
+        String sHight =  String.valueOf(hight);
+        setSize(Integer.parseInt(sWidth),Integer.parseInt(sHight));
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         p2.add(new JLabel(new ImageIcon("src/FrontEnd/Splash.png"))); //adds splash screen
@@ -130,6 +138,37 @@ public class UI extends JFrame implements ActionListener {
         repaint();
 
         p2.setBackground(Color.BLACK);
+
+
+        
+        //make textfeald here and make the output become one of the args in the booking method
+
+        JTextField flightInput = new JTextField();
+        JTextField seatInput = new JTextField();
+        
+        JTextField firstNameInput = new JTextField();
+        JTextField LastNameInput = new JTextField();
+        JTextField DOBInput = new JTextField();
+        JTextField AgeInput = new JTextField();
+        JTextField PhoneInput = new JTextField();
+        JTextField emailInput = new JTextField();
+
+        String flight = flightInput.toString();
+        String seat = seatInput.toString(); 
+        String[] infoArr = new String[6];// first name, last name, DOB, age, phone, email <- in that order
+
+        infoArr[0] = firstNameInput.toString();
+        infoArr[1] = LastNameInput.toString();
+        infoArr[2] = DOBInput.toString();
+        infoArr[3] = AgeInput.toString();
+        infoArr[4] = PhoneInput.toString();
+        infoArr[5] = emailInput.toString();
+
+
+       
+        PeopleDB.bookSeat(flight, seat, infoArr);
+
+
     }
 
     /**
@@ -269,10 +308,37 @@ public class UI extends JFrame implements ActionListener {
         manualCancelF.add(FCancelD);
     }
 
+
     /**
      * Display cancellation.
      */
     public void DisplayCancellation() {
-
+        //ticket cancel 
+        JTextField flightNumber = new JTextField();
+        
+        
+        String flight = "";
+        String sFlightNum = flightNumber.toString();
+        if(Integer.parseInt(sFlightNum)<101|| Integer.parseInt(sFlightNum)>120&&Integer.parseInt(sFlightNum)<201||Integer.parseInt(sFlightNum)>220){
+            System.out.println("THAT IS NOT A FLIGHT NUMBER");
+        }else{
+            flight = flightNumber.toString();
+        }
+        
+        JTextField seatNumber = new JTextField();
+        
+        String seat = "";
+        String sSeatNum = seatNumber.toString();
+        if(sSeatNum.length()> 2){
+            seat = "";
+        }else if(((int)seatNumber.toString().charAt(1)) >2){
+            seat = "";
+        }else if(seatNumber.toString().charAt(0) != 'A'||seatNumber.toString().charAt(0) != 'B'||seatNumber.toString().charAt(0) != 'C'||seatNumber.toString().charAt(0) != 'E'){
+            seat="";
+        }else{
+            seat= seatNumber.toString();
+        }
+        
+        PeopleDB.canncelSeat(flight, seat);
     }
 }
