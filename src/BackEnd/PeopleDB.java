@@ -162,9 +162,9 @@ public class PeopleDB {
         pplIndex.put("219", "3041");
         pplIndex.put("220", "3121");
         String line = "";
-        int index = Integer.parseInt(pplIndex.get(fight));
+        int index = Integer.parseInt(pplIndex.get(fight)) -1;
         String[] arr = new String[80];
-        for(int i =0; i<79; i++){
+        for(int i =0; i<80; i++){
             File fileObj = new File("src/BackEnd/PeopleData/testDB");
             try {
                 line= Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(index);
