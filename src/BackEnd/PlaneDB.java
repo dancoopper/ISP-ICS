@@ -3,6 +3,7 @@ package BackEnd;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -200,7 +201,7 @@ public class PlaneDB {
         plane2Index.put("219", 234);
         plane2Index.put("220", 247);
 
-        String[] seatsArr = {"A1", "A2", "B1", "B2", "C1", "C2","D1","D2", "E1", "E2"};
+        String[] seatsArr = {"A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2", "E1", "E2"};
 
         int nFlightNum = Integer.parseInt(flightNum);
         if (nFlightNum < 121 && nFlightNum > 100) {
@@ -285,9 +286,7 @@ public class PlaneDB {
     }
 
 
-
-
-    public static void seatCancel(String flightNum, int seatNum){
+    public static void seatCancel(String flightNum, int seatNum) {
         HashMap<String, Integer> plane1Index = new HashMap<>();
         plane1Index.put("101", 0);
         plane1Index.put("102", 13);
@@ -332,7 +331,7 @@ public class PlaneDB {
         plane2Index.put("219", 234);
         plane2Index.put("220", 247);
 
- String[] seatsArr = {"A1", "A2", "B1", "B2", "C1", "C2","D1","D2", "E1", "E2"};
+        String[] seatsArr = {"A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2", "E1", "E2"};
 
         int nFlightNum = Integer.parseInt(flightNum);
         if (nFlightNum < 121 && nFlightNum > 100) {
@@ -343,7 +342,7 @@ public class PlaneDB {
                 StringBuilder sb = new StringBuilder();
                 String line;
                 int currentLineNumber = 0;
-                
+
 
                 int lineNumber = plane1Index.get(flightNum) + 2 + seatNum;
                 String newLine = "";
@@ -370,7 +369,7 @@ public class PlaneDB {
                 writer.close();
 
                 System.out.println("Line " + lineNumber + " edited successfully.");
-            
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -409,7 +408,7 @@ public class PlaneDB {
                 writer.close();
 
                 System.out.println("Line " + lineNumber + " edited successfully.");
-                
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -666,6 +665,100 @@ public class PlaneDB {
         }
 
         return list;
+    }
+
+    public static String[][] getByLoc(String loc) {
+        HashMap<String, Integer> plane1Index = new HashMap<>();
+        plane1Index.put("101", 0);
+        plane1Index.put("102", 13);
+        plane1Index.put("103", 26);
+        plane1Index.put("104", 39);
+        plane1Index.put("105", 52);
+        plane1Index.put("106", 65);
+        plane1Index.put("107", 78);
+        plane1Index.put("108", 91);
+        plane1Index.put("109", 104);
+        plane1Index.put("110", 117);
+        plane1Index.put("111", 130);
+        plane1Index.put("112", 143);
+        plane1Index.put("113", 156);
+        plane1Index.put("114", 169);
+        plane1Index.put("115", 182);
+        plane1Index.put("116", 195);
+        plane1Index.put("117", 208);
+        plane1Index.put("118", 221);
+        plane1Index.put("119", 234);
+        plane1Index.put("120", 247);
+
+        HashMap<String, Integer> plane2Index = new HashMap<>();
+        plane2Index.put("201", 0);
+        plane2Index.put("202", 13);
+        plane2Index.put("203", 26);
+        plane2Index.put("204", 39);
+        plane2Index.put("205", 52);
+        plane2Index.put("206", 65);
+        plane2Index.put("207", 78);
+        plane2Index.put("208", 91);
+        plane2Index.put("209", 104);
+        plane2Index.put("210", 117);
+        plane2Index.put("211", 130);
+        plane2Index.put("212", 143);
+        plane2Index.put("213", 156);
+        plane2Index.put("214", 169);
+        plane2Index.put("215", 182);
+        plane2Index.put("216", 195);
+        plane2Index.put("217", 208);
+        plane2Index.put("218", 221);
+        plane2Index.put("219", 234);
+        plane2Index.put("220", 247);
+
+
+        try {
+            File fileObj1 = new File("src/BackEnd/PlaneData/primary");
+
+            ArrayList<String> flight = new ArrayList<>();
+            ArrayList<String> location = new ArrayList<>();
+            int counter = 0;
+            for (int i = 0; i < 259; i++) {
+                String line = Files.readAllLines(Paths.get(String.valueOf(fileObj1))).get(i);
+                if (line.equals("location: " + loc)) {
+                    String sLoc = Files.readAllLines(Paths.get(String.valueOf(fileObj1))).get(i - 11);
+                    flight.add(sLoc);
+                    location.add(line);
+                }
+                counter++;
+            }
+
+
+            File fileObj2 = new File("src/BackEnd/PlaneData/secondary");
+            for (int i = 0; i < 259; i++) {
+                String line = Files.readAllLines(Paths.get(String.valueOf(fileObj2))).get(i);
+                if (line.equals("location: " + loc)) {
+                    String sLoc = Files.readAllLines(Paths.get(String.valueOf(fileObj2))).get(i - 11);
+                    flight.add(sLoc);
+                    location.add(line);
+                }
+                counter++;
+            }
+
+            String[][] flightNumNLoc = new String[flight.size()][location.size()];
+
+            for (int i = 0; i < flightNumNLoc.length; i++) {
+                for (int j = 0; j < flightNumNLoc[i].length; j++) {
+                    if (i == 0) {
+                        flightNumNLoc[i][j] = flight.get(j);
+                    } else {
+                        flightNumNLoc[i][j] = location.get(j);
+                    }
+                }
+            }
+            return flightNumNLoc;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
