@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.nio.file.Path;
+
 /**
  * The type People db.
  */
@@ -26,36 +28,8 @@ public class PeopleDB {
         return sNum;
     }
 
-    /**
-     * Read file string [ ].
-     *
-     * @param witchPlane the witch plane
-     * @param date       the date
-     * @return the string [ ]
-     */
-    public static String[] readFile(int witchPlane, int date) {
-        String[] s = new String[10];
 
-        try {
-            File fileObj = new File("src/BackEnd/PeopleData/primary");
-            Scanner reader = new Scanner(fileObj);
-            int counter = 0;
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                s[counter] = line;
-                counter++;
-            }
-            reader.close();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return s;
-    }
-
-
-    public static void canncelSeat(String flight, String seat){
+    public static void canncelSeat(String flight, String seat) {
         HashMap<String, String> pplIndex = new HashMap<>();
         pplIndex.put("101", "1");
         pplIndex.put("102", "81");
@@ -109,8 +83,10 @@ public class PeopleDB {
         seatOffSets.put("D2", 57);
         seatOffSets.put("E1", 65);
         seatOffSets.put("E2", 73);
-        try{
-            File file = new File("src/BackEnd/PeopleData/testDB");
+        try {
+            Path path = Paths.get("src/BackEnd/PeopleData/testDB");
+            String filePath = String.valueOf(path.toRealPath());
+            File file = new File(filePath);
             BufferedReader br = new BufferedReader(new FileReader(file));
             StringBuilder sb = new StringBuilder();
             String line;
@@ -118,46 +94,46 @@ public class PeopleDB {
             int iFlightNum = Integer.parseInt(pplIndex.get(flight));
             int index = iFlightNum + seatOffSets.get(seat);
             int lineNumber = index;
-    
+
             String newLine = "";
             // Read each line and update the specified line
             while ((line = br.readLine()) != null) {
                 currentLineNumber++;
-                if (currentLineNumber == lineNumber+1 ) {
+                if (currentLineNumber == lineNumber + 1) {
                     newLine = "first name:";
                     sb.append(newLine).append(System.lineSeparator());
-                }else if(currentLineNumber == lineNumber+2){
+                } else if (currentLineNumber == lineNumber + 2) {
                     newLine = "last name:";
                     sb.append(newLine).append(System.lineSeparator());
-                }else if(currentLineNumber == lineNumber+3){
-                    newLine ="DOB:";
+                } else if (currentLineNumber == lineNumber + 3) {
+                    newLine = "DOB:";
                     sb.append(newLine).append(System.lineSeparator());
-                }else if(currentLineNumber == lineNumber+4){
+                } else if (currentLineNumber == lineNumber + 4) {
                     newLine = "age:";
                     sb.append(newLine).append(System.lineSeparator());
-                }else if(currentLineNumber == lineNumber+5){
+                } else if (currentLineNumber == lineNumber + 5) {
                     newLine = "phone:";
                     sb.append(newLine).append(System.lineSeparator());
-                }else if(currentLineNumber== lineNumber+6){
+                } else if (currentLineNumber == lineNumber + 6) {
                     newLine = "email:";
                     sb.append(newLine).append(System.lineSeparator());
-                }else {
+                } else {
                     sb.append(line).append(System.lineSeparator());
                 }
             }
             br.close();
-    
+
             FileWriter writer = new FileWriter(file);
-                writer.write(sb.toString());
-                writer.close();
-    
+            writer.write(sb.toString());
+            writer.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public static void bookSeat(String flight, String seat, String[] info){
+    public static void bookSeat(String flight, String seat, String[] info) {
         HashMap<String, String> pplIndex = new HashMap<>();
         pplIndex.put("101", "1");
         pplIndex.put("102", "81");
@@ -226,60 +202,57 @@ public class PeopleDB {
         String age = info[3];
         String phone = info[4];
         String email = info[5];
-        
-        try{
-        File file = new File("src/BackEnd/PeopleData/testDB");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        StringBuilder sb = new StringBuilder();
-        String line;
-        int currentLineNumber = 0;
-        int iFlightNum = Integer.parseInt(pplIndex.get(flight));
-        int index = iFlightNum + seatOffSets.get(seat);
-        int lineNumber = index;
 
-        String newLine = "";
-        // Read each line and update the specified line
-        while ((line = br.readLine()) != null) {
-            currentLineNumber++;
-            if (currentLineNumber == lineNumber+1 ) {
-                newLine =line + firstName;
-                sb.append(newLine).append(System.lineSeparator());
-            }else if(currentLineNumber == lineNumber+2){
-                newLine = line + lastName;
-                sb.append(newLine).append(System.lineSeparator());
-            }else if(currentLineNumber == lineNumber+3){
-                newLine =line + DOB;
-                sb.append(newLine).append(System.lineSeparator());
-            }else if(currentLineNumber == lineNumber+4){
-                newLine = line + age;
-                sb.append(newLine).append(System.lineSeparator());
-            }else if(currentLineNumber == lineNumber+5){
-                newLine = line+ phone;
-                sb.append(newLine).append(System.lineSeparator());
-            }else if(currentLineNumber== lineNumber+6){
-                newLine = line + email;
-                sb.append(newLine).append(System.lineSeparator());
-            }else {
-                sb.append(line).append(System.lineSeparator());
+        try {
+            Path path = Paths.get("src/BackEnd/PeopleData/testDB");
+            String filePath = String.valueOf(path.toRealPath());
+            File file = new File(filePath);
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            int currentLineNumber = 0;
+            int iFlightNum = Integer.parseInt(pplIndex.get(flight));
+            int index = iFlightNum + seatOffSets.get(seat);
+            int lineNumber = index;
+
+            String newLine = "";
+            // Read each line and update the specified line
+            while ((line = br.readLine()) != null) {
+                currentLineNumber++;
+                if (currentLineNumber == lineNumber + 1) {
+                    newLine = line + firstName;
+                    sb.append(newLine).append(System.lineSeparator());
+                } else if (currentLineNumber == lineNumber + 2) {
+                    newLine = line + lastName;
+                    sb.append(newLine).append(System.lineSeparator());
+                } else if (currentLineNumber == lineNumber + 3) {
+                    newLine = line + DOB;
+                    sb.append(newLine).append(System.lineSeparator());
+                } else if (currentLineNumber == lineNumber + 4) {
+                    newLine = line + age;
+                    sb.append(newLine).append(System.lineSeparator());
+                } else if (currentLineNumber == lineNumber + 5) {
+                    newLine = line + phone;
+                    sb.append(newLine).append(System.lineSeparator());
+                } else if (currentLineNumber == lineNumber + 6) {
+                    newLine = line + email;
+                    sb.append(newLine).append(System.lineSeparator());
+                } else {
+                    sb.append(line).append(System.lineSeparator());
+                }
             }
-        }
-        br.close();
+            br.close();
 
-        FileWriter writer = new FileWriter(file);
+            FileWriter writer = new FileWriter(file);
             writer.write(sb.toString());
             writer.close();
 
-    } catch (IOException e) {
-        e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
 
-
-        
-
-
-    
-    
 
     /**
      * Find flight i nfo string.
@@ -330,12 +303,21 @@ public class PeopleDB {
         pplIndex.put("219", "3041");
         pplIndex.put("220", "3121");
         String line = "";
-        int index = Integer.parseInt(pplIndex.get(fight)) -1;
+        int index = Integer.parseInt(pplIndex.get(fight)) - 1;
         String[] arr = new String[80];
-        for(int i =0; i<80; i++){
-            File fileObj = new File("src/BackEnd/PeopleData/testDB");
+        for (int i = 0; i < 80; i++) {
+
+            Path path = Paths.get("src/BackEnd/PeopleData/testDB");
+            String filePath = null;
             try {
-                line= Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(index);
+                filePath = String.valueOf(path.toRealPath());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            File fileObj = new File(filePath);
+
+            try {
+                line = Files.readAllLines(Paths.get(String.valueOf(fileObj))).get(index);
                 arr[i] = line;
                 index++;
             } catch (IOException e) {
