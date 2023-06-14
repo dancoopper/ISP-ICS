@@ -257,18 +257,18 @@ public class UI extends JFrame implements ActionListener {
         bookContactI.add(bookOkay);
         bookOkay.addActionListener(e->{
             System.out.println("TEST");
-                    String flight = flightInput.getText();
-                    String seat = seatInput.getText();
-                    String[] infoArr = new String[6];// first name, last name, DOB, age, phone, email <- in that order
+            String flight = flightInput.getText();
+            String seat = seatInput.getText();
+            String[] infoArr = new String[6];// first name, last name, DOB, age, phone, email <- in that order
 
-                    infoArr[0] = firstNameInput.getText();
-                    infoArr[1] = LastNameInput.getText();
-                    infoArr[2] = DOBInput.getText();
-                    infoArr[3] = AgeInput.getText();
-                    infoArr[4] = PhoneInput.getText();
-                    infoArr[5] = emailInput.getText();
+            infoArr[0] = firstNameInput.getText();
+            infoArr[1] = LastNameInput.getText();
+            infoArr[2] = DOBInput.getText();
+            infoArr[3] = AgeInput.getText();
+            infoArr[4] = PhoneInput.getText();
+            infoArr[5] = emailInput.getText();
 
-                    int seatNum = 0;
+            int seatNum = 0;
             switch (seat.toString()) {
                 case "A1":
                     seatNum = 0;
@@ -315,7 +315,7 @@ public class UI extends JFrame implements ActionListener {
         bookPanel.add(bookNameI);
         bookPanel.add(bookAgeI);
         bookPanel.add(bookContactI);
-        }
+    }
 
 
     /**
@@ -352,7 +352,7 @@ public class UI extends JFrame implements ActionListener {
             String[] infoArr = PeopleDB.findFlightInfo(flightToCheck); //this arr is full of all info for the given flight number it is 80 big
             if (flightInt >= 101 && flightInt <= 120 || flightInt >= 201 && flightInt <= 220) {
 
-                displayInfo.setText("TICKET INFORMATION FOR FLIGHT " + flightToCheck + ": ");
+                displayInfo.setText("TICKET INFORMATION FOR FLIGHT " + flightToCheck + ": "+ Arrays.toString(infoArr));
 
             } else {
                 JOptionPane.showMessageDialog(this, "That is not a valid flight number", "Error", JOptionPane.WARNING_MESSAGE);
