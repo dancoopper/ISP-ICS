@@ -36,6 +36,8 @@ public class UI extends JFrame implements ActionListener {
     JPanel bookPanel = new JPanel();
     JPanel guestPanel = new JPanel();
     JPanel manualPanel = new JPanel();
+    JPanel ticketCanPanel = new JPanel();
+    JPanel planeCanPanel = new JPanel();
 
     //booleans for each page
     boolean bookPan = false;
@@ -48,58 +50,64 @@ public class UI extends JFrame implements ActionListener {
         setLayout(new GridLayout(1, 1));
         setSize(1000, 800);
         setResizable(false);
-        setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         p2.add(new JLabel(new ImageIcon("src/FrontEnd/Splash.png"))); //adds splash screen
 
+        //MenuBar
         JMenuBar mb = new JMenuBar();
         JMenu bookings, guests, manuals, cancel;
         JMenuItem booking, guest, manual, ticketC, planeC;
-
-
+        //Booking
         booking = new JMenuItem("Book Ticket ");
         booking.addActionListener(this);
         booking.setActionCommand("Book");
         bookings = new JMenu("Booking"); //dropping from
-
+        //Flight info
         guest = new JMenuItem("Flight Info ");
         guest.addActionListener(this);
         guest.setActionCommand("Guest");
         guests = new JMenu("Ticket information"); //dropping from
-
+        //Manual
         manual = new JMenuItem("User Manual ");
         manual.addActionListener(this);
         manual.setActionCommand("Manual");
         manuals = new JMenu("Manual Access"); //dropping from
-
+        //Overall Cancel
         cancel = new JMenu("Cancellations");
         cancel.addActionListener(this);
         cancel.setActionCommand("Cancel");
-
-        ticketC = new JMenuItem("Cancel Ticket");
+        ticketC = new JMenuItem("Cancel Ticket"); //CANCEL TICKET
         ticketC.addActionListener(this);
         ticketC.setActionCommand("TicketCancel");
-
-        planeC = new JMenuItem("Cancel Flight");
+        planeC = new JMenuItem("Cancel Flight"); //CANCEL FLIGHT
         planeC.addActionListener(this);
         planeC.setActionCommand("FlightCancel");
-
+        //Adding everything to menu bar
         bookings.add(booking);
         mb.add(bookings);
-
         guests.add(guest);
         mb.add(guests);
-
         manuals.add(manual);
         mb.add(manuals);
-
-
         cancel.add(ticketC);
         cancel.add(planeC);
         mb.add(cancel);
-
         setJMenuBar(mb);
         add(p2);
+
+        setVisible(true); //make frame visible
+
+        //Other buttons
+        //Destination buttons in booking
+        JButton jamaica = new JButton("Jamaica"); //jamaica
+        jamaica.addActionListener(this);
+        jamaica.setActionCommand("jam");
+        JButton peru = new JButton("Peru"); //peru
+        peru.addActionListener(this);
+        peru.setActionCommand("per");
+        JButton norway = new JButton("Norway"); //norway
+        norway.addActionListener(this);
+        norway.setActionCommand("nor");
     }
 
     @Override
@@ -109,23 +117,47 @@ public class UI extends JFrame implements ActionListener {
             p2.removeAll();
             p2.add(bookPanel);
             bookPan = true;
+            guestPan = false;
+            manualPan = false;
+            ticketCanPan = false;
+            flightCanPan = false;
             BookingScreen();
         } else if (e.getActionCommand().equals("Guest")) {
             p2.removeAll();
             p2.add(guestPanel);
+            bookPan = false;
             guestPan = true;
+            manualPan = false;
+            ticketCanPan = false;
+            flightCanPan = false;
             GuestInfo();
         } else if (e.getActionCommand().equals("Manual")) {
             p2.removeAll();
             p2.add(manualPanel);
+            bookPan = false;
+            guestPan = false;
             manualPan = true;
+            ticketCanPan = false;
+            flightCanPan = false;
             DisplayManual();
         } else if (e.getActionCommand().equals("TicketCancel")) {
+            p2.removeAll();
+            p2.add(ticketCanPanel);
+            bookPan = false;
+            guestPan = false;
+            manualPan = false;
             ticketCanPan = true;
-            System.out.println("hi");
+            flightCanPan = false;
+            DisplayCancellationTicket();
         } else if (e.getActionCommand().equals("FlightCancel")) {
+            p2.removeAll();
+            p2.add(planeCanPanel);
+            bookPan = false;
+            guestPan = false;
+            manualPan = false;
+            ticketCanPan = false;
             flightCanPan = true;
-            System.out.println("hi");
+            DisplayCancellation();
         } else {
             p2.setBackground(Color.WHITE);
             repaint();
@@ -141,6 +173,7 @@ public class UI extends JFrame implements ActionListener {
     public void BookingScreen() {
         repaint();
         bookPanel.setLayout(new GridLayout(4, 1));
+
         //make textfeald here and make the output become one of the args in the booking method
         JLabel flightIn = new JLabel("What is the flight number?");
         JTextField flightInput = new JTextField(3);
@@ -372,9 +405,10 @@ public class UI extends JFrame implements ActionListener {
     /**
      * Display cancellation.
      */
-    public void DisplayCancellation() {
-        //ticket cancel 
-        JTextField flightNumber = new JTextField();
+    public void DisplayCancellationTicket() {
+        //ticket cancel
+        JLabel
+        JTextField flightNumber = new JTextField(3);
         
         
         String flight = "";
