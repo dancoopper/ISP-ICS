@@ -373,7 +373,7 @@ public class UI extends JFrame implements ActionListener {
     public void DisplayManual() {
         repaint();
         p2.add(manualPanel);
-        manualPanel.setLayout(new GridLayout());
+        manualPanel.setLayout(new GridLayout(6, 1));
         manualPanel.setBackground(Color.GRAY);
 
         //sections of manual
@@ -492,6 +492,8 @@ public class UI extends JFrame implements ActionListener {
      */
     public void DisplayCancellationTicket() {
         //ticket cancel
+        ticketCanPanel.setBackground(Color.WHITE);
+        repaint();
         JLabel flightAsk = new JLabel("What is the flight number:");
         JTextField flightNumber = new JTextField(3);
         ticketCanPanel.add(flightAsk);
