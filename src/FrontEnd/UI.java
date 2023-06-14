@@ -304,7 +304,6 @@ public class UI extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "that is not one of the seat numbers", "Error", JOptionPane.WARNING_MESSAGE);
                     break;
             }
-            System.out.println(seatNum);
             PlaneDB.bookSeat(flight, seatNum);
             PeopleDB.bookSeat(flight, seat, infoArr);
             JOptionPane.showMessageDialog(this, "Flight " + flight + " was successfully booked." +
@@ -336,7 +335,7 @@ public class UI extends JFrame implements ActionListener {
 
         JPanel guestDisplayAsk = new JPanel();
         JTextArea displayInfo = new JTextArea();
-        displayInfo.setColumns(80);
+        displayInfo.setColumns(100);
         displayInfo.setRows(20);
 
         guestPanel.add(guestAsk);
@@ -352,7 +351,9 @@ public class UI extends JFrame implements ActionListener {
             int flightInt = Integer.parseInt(flightToCheck);
             String[] infoArr = PeopleDB.findFlightInfo(flightToCheck); //this arr is full of all info for the given flight number it is 80 big
             if (flightInt >= 101 && flightInt <= 120 || flightInt >= 201 && flightInt <= 220) {
+
                 displayInfo.setText("TICKET INFORMATION FOR FLIGHT " + flightToCheck + ": ");
+
             } else {
                 JOptionPane.showMessageDialog(this, "That is not a valid flight number", "Error", JOptionPane.WARNING_MESSAGE);
                 flightRetrieve.setText("");
@@ -372,7 +373,7 @@ public class UI extends JFrame implements ActionListener {
     public void DisplayManual() {
         repaint();
         p2.add(manualPanel);
-        manualPanel.setLayout(new FlowLayout());
+        manualPanel.setLayout(new GridLayout());
         manualPanel.setBackground(Color.GRAY);
 
         //sections of manual
