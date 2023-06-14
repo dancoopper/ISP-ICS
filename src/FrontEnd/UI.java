@@ -188,7 +188,7 @@ public class UI extends JFrame implements ActionListener {
             manualPan = false;
             ticketCanPan = false;
             flightCanPan = true;
-            //DisplayCancellation();
+            DisplayCancellationPlane();
         } else {
             p2.setBackground(Color.WHITE);
             repaint();
@@ -335,6 +335,7 @@ public class UI extends JFrame implements ActionListener {
 
         JPanel guestDisplayAsk = new JPanel();
         JTextArea displayInfo = new JTextArea();
+        displayInfo.setLineWrap(true);
         displayInfo.setColumns(100);
         displayInfo.setRows(20);
 
@@ -356,7 +357,7 @@ public class UI extends JFrame implements ActionListener {
 
             } else {
                 JOptionPane.showMessageDialog(this, "That is not a valid flight number", "Error", JOptionPane.WARNING_MESSAGE);
-                flightRetrieve.setText("");
+                flightRetrieve.setText(" ");
             }
         });
 
@@ -492,6 +493,7 @@ public class UI extends JFrame implements ActionListener {
      */
     public void DisplayCancellationTicket() {
         //ticket cancel
+        p2.add(ticketCanPanel);
         ticketCanPanel.setBackground(Color.WHITE);
         repaint();
         JLabel flightAsk = new JLabel("What is the flight number:");
@@ -504,31 +506,58 @@ public class UI extends JFrame implements ActionListener {
         ticketCanPanel.add(seatAsk);
         ticketCanPanel.add(seatNumber);
 
+        JButton ticketOkay = new JButton("OKAY");
+        ticketCanPanel.add(ticketOkay);
 
-        //JButton
+        ticketOkay.addActionListener(e-> {
+            String flight = "";
+            String sFlightNum = flightNumber.getText();
+            if (Integer.parseInt(sFlightNum) < 101 || Integer.parseInt(sFlightNum) > 120 && Integer.parseInt(sFlightNum) < 201 || Integer.parseInt(sFlightNum) > 220) {
+                JOptionPane.showMessageDialog(this, "THAT IS NOT A FLIGHT NUMBER");
+            } else {
+                flight = flightNumber.getText();
+            }
 
-        String flight = "";
-        String sFlightNum = flightNumber.toString();
-        if (Integer.parseInt(sFlightNum) < 101 || Integer.parseInt(sFlightNum) > 120 && Integer.parseInt(sFlightNum) < 201 || Integer.parseInt(sFlightNum) > 220) {
-            System.out.println("THAT IS NOT A FLIGHT NUMBER");
-        } else {
-            flight = flightNumber.toString();
-        }
+            String seat = "";
+            String sSeatNum = seatNumber.getText();
+            if (sSeatNum.length() != 2) { //if seat number is wrong length
+                seat = "";
+                JOptionPane.showMessageDialog(this, "this is not a valid seat number 1");
+            } else if (seatNumber.getText().charAt(1) != '1' && seatNumber.getText().charAt(1) != '2') {
+                seat = "";
+                JOptionPane.showMessageDialog(this, "this is not a valid seat number 2");
+            } else if (seatNumber.getText().charAt(0) != 'A' && seatNumber.getText().charAt(0) != 'B' && seatNumber.getText().charAt(0) != 'C' && seatNumber.getText().charAt(0) != 'D' && seatNumber.getText().charAt(0) != 'E') {
+                seat = "";
+                JOptionPane.showMessageDialog(this, "this is not a valid seat number 3");
+            } else {
+                seat = seatNumber.getText();
+            }
 
-        String seat = "";
-        String sSeatNum = seatNumber.toString();
-        if (sSeatNum.length() > 2) {
-            seat = "";
-        } else if (((int) seatNumber.toString().charAt(1)) > 2) {
-            seat = "";
-        } else if (seatNumber.toString().charAt(0) != 'A' || seatNumber.toString().charAt(0) != 'B' || seatNumber.toString().charAt(0) != 'C' || seatNumber.toString().charAt(0) != 'E') {
-            seat = "";
-        } else {
-            seat = seatNumber.toString();
-        }
+            PeopleDB.canncelSeat(flight, seat);
 
-        PeopleDB.canncelSeat(flight, seat);
+            JOptionPane.showMessageDialog(this, "Ticket was successfully cancelled", "Cancellation Confirmation", JOptionPane.INFORMATION_MESSAGE);
+        });
+    }
 
-        JOptionPane.showMessageDialog(this, "Ticket was successfully cancelled", "Cancellation Confirmation", JOptionPane.INFORMATION_MESSAGE);
+    public void DisplayCancellationPlane() {
+        //ticket cancel
+        p2.add(planeCanPanel);
+        planeCanPanel.setBackground(Color.WHITE);
+        repaint();
+
+        JLabel cancelAsk = new JLabel("What is the flight number:");
+        JTextField cancelFlight = new JTextField(3);
+        planeCanPanel.add(cancelAsk);
+        planeCanPanel.add(cancelFlight);
+
+        JButton planeOkay = new JButton("OKAY");
+        planeCanPanel.add(planeOkay);
+
+        planeOkay.addActionListener(e-> {
+            PlaneDB.cancel(cancelFlight.getText());
+            JOptionPane.showMessageDialog(this, "This plane was successfully cancelled", "Cancellation Confirmation", JOptionPane.INFORMATION_MESSAGE);
+
+        });
+
     }
 }
