@@ -46,6 +46,8 @@ public class UI extends JFrame implements ActionListener {
     boolean ticketCanPan = false;
     boolean flightCanPan = false;
 
+    private JButton bookOkay;
+
     public void mainWindow() {
         setLayout(new GridLayout(1, 1));
         setSize(1000, 800);
@@ -189,6 +191,9 @@ public class UI extends JFrame implements ActionListener {
             ticketCanPan = false;
             flightCanPan = true;
             //DisplayCancellation();
+
+        } else if (e.getActionCommand().equals("BookOkay")) {
+
         } else {
             p2.setBackground(Color.WHITE);
             repaint();
@@ -252,7 +257,9 @@ public class UI extends JFrame implements ActionListener {
 
         bookContactI.add(emailIn);
         bookContactI.add(emailInput);
-        JButton bookOkay = new JButton("OKAY");
+        bookOkay = new JButton("OKAY");
+        bookOkay.addActionListener(this);
+        bookOkay.setActionCommand("BookOkay");
         bookContactI.add(bookOkay);
 
         bookPanel.add(bookPI);
@@ -261,7 +268,7 @@ public class UI extends JFrame implements ActionListener {
         bookPanel.add(bookContactI);
 
         String flight = flightInput.toString();
-        String seat = seatInput.toString(); 
+        String seat = seatInput.toString();
         String[] infoArr = new String[6];// first name, last name, DOB, age, phone, email <- in that order
 
         infoArr[0] = firstNameInput.toString();
@@ -293,7 +300,7 @@ public class UI extends JFrame implements ActionListener {
             break;
             case "E2": seatNum = 9;
             break;
-            default: JOptionPane.showConfirmDialog(this, "that is not one of the seat numbers", "Error", JOptionPane.OK_OPTION); // make this refresh the screen
+            default: JOptionPane.showMessageDialog(this, "that is not one of the seat numbers", "Error", JOptionPane.WARNING_MESSAGE); // make this refresh the screen
         }
 
         PlaneDB.bookSeat(flight, seatNum);
