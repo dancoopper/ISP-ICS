@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 
 /**
@@ -307,7 +308,7 @@ public class UI extends JFrame implements ActionListener {
             PlaneDB.bookSeat(flight, seatNum);
             PeopleDB.bookSeat(flight, seat, infoArr);
             JOptionPane.showMessageDialog(this, "Flight " + flight + " was successfully booked." +
-                    "Cost: $257.00" + " Seat: " + seat + "on flight " + flight);
+                    "Cost: $257.00 " + " Seat: " + seat + " on flight " + flight);
         });
 
 
@@ -322,23 +323,46 @@ public class UI extends JFrame implements ActionListener {
      * Guest info.
      */
     public void GuestInfo() {
+        guestPanel.setBackground(Color.WHITE);
         repaint();
         p2.add(guestPanel);
-        guestPanel.setBackground(Color.WHITE);
+        guestPanel.setLayout(new GridLayout(2,1 ));
 
+        JPanel guestAsk = new JPanel();
         JLabel fc = new JLabel("What flight is being checked:");
-        JTextField ffield = new JTextField(3);
+        JTextField flightRetrieve = new JTextField(3);
+        JButton guestOkay = new JButton("OKAY");
+        guestOkay.setActionCommand("hi");
 
-        JButton checkButton = new JButton("Check");
-        checkButton.addActionListener(this);
+        JPanel guestDisplayAsk = new JPanel();
+        JTextArea displayInfo = new JTextArea();
+        displayInfo.setColumns(80);
+        displayInfo.setRows(20);
+
+        guestPanel.add(guestAsk);
+        guestPanel.add(guestDisplayAsk);
+
+        guestAsk.add(fc);
+        guestAsk.add(flightRetrieve);
+        guestAsk.add(guestOkay);
+        guestDisplayAsk.add(displayInfo);
+
+        guestOkay.addActionListener(e->{
+            String flightToCheck = flightRetrieve.getText();
+            int flightInt = Integer.parseInt(flightToCheck);
+            String[] infoArr = PeopleDB.findFlightInfo(flightToCheck); //this arr is full of all info for the given flight number it is 80 big
+            if (flightInt >= 101 && flightInt <= 120 || flightInt >= 201 && flightInt <= 220) {
+                displayInfo.setText("TICKET INFORMATION FOR FLIGHT " + flightToCheck + ": ");
+            } else {
+                JOptionPane.showMessageDialog(this, "That is not a valid flight number", "Error", JOptionPane.WARNING_MESSAGE);
+                flightRetrieve.setText("");
+            }
+        });
 
 
-        guestPanel.add(fc);
-        guestPanel.add(ffield);
-        guestPanel.add(checkButton);
 
 
-        String[] infoArr = PeopleDB.findFlightInfo(ffield.toString());//this arr is full of all in for for the given flight number it is 80 big
+
     }
 
 
