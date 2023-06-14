@@ -3,6 +3,7 @@ package FrontEnd;
 import javax.swing.*;
 
 import BackEnd.PeopleDB;
+import BackEnd.PlaneDB;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -206,7 +207,32 @@ public class UI extends JFrame implements ActionListener {
         infoArr[4] = PhoneInput.toString();
         infoArr[5] = emailInput.toString();
 
+        int seatNum = 0;
+        switch(seat){
+            case "A1": seatNum =0;
+            break;
+            case "A2": seatNum =1;
+            break;
+            case "B1": seatNum = 2;
+            break;
+            case "B2": seatNum = 3;
+            break;
+            case "C1": seatNum = 4;
+            break;
+            case "C2": seatNum = 5;
+            break;
+            case "D1": seatNum = 6;
+            break;
+            case "D2": seatNum = 7;
+            break;
+            case "E1": seatNum = 8;
+            break;
+            case "E2": seatNum = 9;
+            break;
+            default: JOptionPane.showConfirmDialog(this, "that is not one of the seat numbers", "Error", JOptionPane.OK_OPTION); // make this refresh the screen
+        }
 
+        PlaneDB.bookSeat(flight, seatNum);
         PeopleDB.bookSeat(flight, seat, infoArr);
     }
 
@@ -227,6 +253,9 @@ public class UI extends JFrame implements ActionListener {
         guestPanel.add(fc);
         guestPanel.add(ffield);
         guestPanel.add(checkButton);
+
+        
+       String[] infoArr =  PeopleDB.findFlightInfo(ffield.toString());//this arr is full of all infor for the given flight number it is 80 big 
     }
 
 

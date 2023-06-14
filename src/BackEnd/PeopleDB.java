@@ -3,12 +3,8 @@ package BackEnd;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-
-import javax.print.DocFlavor.STRING;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,16 +25,6 @@ public class PeopleDB {
         String sNum = String.valueOf(num);
         return sNum;
     }
-
-    /**
-     * Wright to file.
-     *
-     * @param info the info
-     */
-    public static void wrightToFile(String[] info) {
-
-    }
-
 
     /**
      * Read file string [ ].
