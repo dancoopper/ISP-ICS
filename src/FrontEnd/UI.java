@@ -188,7 +188,7 @@ public class UI extends JFrame implements ActionListener {
             manualPan = false;
             ticketCanPan = false;
             flightCanPan = true;
-            DisplayCancellation();
+            DisplayCancellationTicket();
         } else {
             p2.setBackground(Color.WHITE);
             repaint();
@@ -453,6 +453,7 @@ public class UI extends JFrame implements ActionListener {
      */
     public void DisplayCancellationTicket() {
         //ticket cancel
+        JLabel flightAsk = new JLabel("What is the flight number:");
         JTextField flightNumber = new JTextField(3);
         ticketCanPanel.add(flightAsk);
         ticketCanPanel.add(flightNumber);
