@@ -1,14 +1,12 @@
 package FrontEnd;
 
-import javax.swing.*;
-
 import BackEnd.PeopleDB;
 import BackEnd.PlaneDB;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 
 
 /**
@@ -17,17 +15,6 @@ import java.awt.event.ActionListener;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class UI extends JFrame implements ActionListener {
-    /**
-     * Instantiates a new Ui.
-     */
-    public UI() {
-        super("Fly Away Airlines");
-    }
-
-    public UI(int n) {
-
-    }
-
     /**
      * Main window.
      */
@@ -38,15 +25,24 @@ public class UI extends JFrame implements ActionListener {
     JPanel manualPanel = new JPanel();
     JPanel ticketCanPanel = new JPanel();
     JPanel planeCanPanel = new JPanel();
-
     //booleans for each page
     boolean bookPan = false;
     boolean guestPan = false;
     boolean manualPan = false;
     boolean ticketCanPan = false;
     boolean flightCanPan = false;
-
     private JButton bookOkay;
+    private boolean bookOkayPressed;
+
+    /**
+     * Instantiates a new Ui.
+     */
+    public UI() {
+        super("Fly Away Airlines");
+    }
+    public UI(int n) {
+
+    }
 
     public void mainWindow() {
         setLayout(new GridLayout(1, 1));
@@ -111,32 +107,33 @@ public class UI extends JFrame implements ActionListener {
         norway.addActionListener(this);
         norway.setActionCommand("nor");
     }
-    public void removal(){
-        if (bookPan = true){
+
+    public void removal() {
+        if (bookPan == true) {
             guestPanel.removeAll();
             manualPanel.removeAll();
             ticketCanPanel.removeAll();
             planeCanPanel.removeAll();
         }
-        if (guestPan = true){
+        if (guestPan == true) {
             bookPanel.removeAll();
             manualPanel.removeAll();
             ticketCanPanel.removeAll();
             planeCanPanel.removeAll();
         }
-        if (manualPan = true){
+        if (manualPan == true) {
             bookPanel.removeAll();
             guestPanel.removeAll();
             ticketCanPanel.removeAll();
             planeCanPanel.removeAll();
         }
-        if (ticketCanPan = true){
+        if (ticketCanPan == true) {
             bookPanel.removeAll();
             guestPanel.removeAll();
             manualPanel.removeAll();
             planeCanPanel.removeAll();
         }
-        if (flightCanPan = true){
+        if (flightCanPan == true) {
             bookPanel.removeAll();
             guestPanel.removeAll();
             manualPanel.removeAll();
@@ -191,9 +188,6 @@ public class UI extends JFrame implements ActionListener {
             ticketCanPan = false;
             flightCanPan = true;
             //DisplayCancellation();
-
-        } else if (e.getActionCommand().equals("BookOkay")) {
-
         } else {
             p2.setBackground(Color.WHITE);
             repaint();
@@ -258,54 +252,71 @@ public class UI extends JFrame implements ActionListener {
         bookContactI.add(emailIn);
         bookContactI.add(emailInput);
         bookOkay = new JButton("OKAY");
-        bookOkay.addActionListener(this);
         bookOkay.setActionCommand("BookOkay");
         bookContactI.add(bookOkay);
+        bookOkay.addActionListener(e->{
+            System.out.println("TEST");
+                    String flight = flightInput.getText();
+                    String seat = seatInput.getText();
+                    String[] infoArr = new String[6];// first name, last name, DOB, age, phone, email <- in that order
+
+                    infoArr[0] = firstNameInput.getText();
+                    infoArr[1] = LastNameInput.getText();
+                    infoArr[2] = DOBInput.getText();
+                    infoArr[3] = AgeInput.getText();
+                    infoArr[4] = PhoneInput.getText();
+                    infoArr[5] = emailInput.getText();
+
+                    int seatNum = 0;
+            switch (seat.toString()) {
+                case "A1":
+                    seatNum = 0;
+                    break;
+                case "A2":
+                    seatNum = 1;
+                    break;
+                case "B1":
+                    seatNum = 2;
+                    break;
+                case "B2":
+                    seatNum = 3;
+                    break;
+                case "C1":
+                    seatNum = 4;
+                    break;
+                case "C2":
+                    seatNum = 5;
+                    break;
+                case "D1":
+                    seatNum = 6;
+                    break;
+                case "D2":
+                    seatNum = 7;
+                    break;
+                case "E1":
+                    seatNum = 8;
+                    break;
+                case "E2":
+                    seatNum = 9;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "that is not one of the seat numbers", "Error", JOptionPane.WARNING_MESSAGE);
+                    break;
+            }
+            System.out.println(seatNum);
+            PlaneDB.bookSeat(flight, seatNum);
+            PeopleDB.bookSeat(flight, seat, infoArr);
+            JOptionPane.showMessageDialog(this, "Flight " + flight + " was successfully booked." +
+                    "Cost: $257.00" + " Seat: " + seat + "on flight " + flight);
+        });
+
 
         bookPanel.add(bookPI);
         bookPanel.add(bookNameI);
         bookPanel.add(bookAgeI);
         bookPanel.add(bookContactI);
-
-        String flight = flightInput.toString();
-        String seat = seatInput.toString();
-        String[] infoArr = new String[6];// first name, last name, DOB, age, phone, email <- in that order
-
-        infoArr[0] = firstNameInput.toString();
-        infoArr[1] = LastNameInput.toString();
-        infoArr[2] = DOBInput.toString();
-        infoArr[3] = AgeInput.toString();
-        infoArr[4] = PhoneInput.toString();
-        infoArr[5] = emailInput.toString();
-
-        int seatNum = 0;
-        switch(seat){
-            case "A1": seatNum =0;
-            break;
-            case "A2": seatNum =1;
-            break;
-            case "B1": seatNum = 2;
-            break;
-            case "B2": seatNum = 3;
-            break;
-            case "C1": seatNum = 4;
-            break;
-            case "C2": seatNum = 5;
-            break;
-            case "D1": seatNum = 6;
-            break;
-            case "D2": seatNum = 7;
-            break;
-            case "E1": seatNum = 8;
-            break;
-            case "E2": seatNum = 9;
-            break;
-            default: JOptionPane.showMessageDialog(this, "that is not one of the seat numbers", "Error", JOptionPane.WARNING_MESSAGE); // make this refresh the screen
         }
 
-        PlaneDB.bookSeat(flight, seatNum);
-        PeopleDB.bookSeat(flight, seat, infoArr);
-    }
 
     /**
      * Guest info.
@@ -326,8 +337,8 @@ public class UI extends JFrame implements ActionListener {
         guestPanel.add(ffield);
         guestPanel.add(checkButton);
 
-        
-       String[] infoArr =  PeopleDB.findFlightInfo(ffield.toString());//this arr is full of all infor for the given flight number it is 80 big 
+
+        String[] infoArr = PeopleDB.findFlightInfo(ffield.toString());//this arr is full of all in for for the given flight number it is 80 big
     }
 
 
@@ -468,27 +479,27 @@ public class UI extends JFrame implements ActionListener {
 
 
         //JButton
-        
+
         String flight = "";
         String sFlightNum = flightNumber.toString();
-        if(Integer.parseInt(sFlightNum)<101|| Integer.parseInt(sFlightNum)>120&&Integer.parseInt(sFlightNum)<201||Integer.parseInt(sFlightNum)>220){
+        if (Integer.parseInt(sFlightNum) < 101 || Integer.parseInt(sFlightNum) > 120 && Integer.parseInt(sFlightNum) < 201 || Integer.parseInt(sFlightNum) > 220) {
             System.out.println("THAT IS NOT A FLIGHT NUMBER");
-        }else{
+        } else {
             flight = flightNumber.toString();
         }
-        
+
         String seat = "";
         String sSeatNum = seatNumber.toString();
-        if(sSeatNum.length()> 2){
+        if (sSeatNum.length() > 2) {
             seat = "";
-        }else if(((int)seatNumber.toString().charAt(1)) >2){
+        } else if (((int) seatNumber.toString().charAt(1)) > 2) {
             seat = "";
-        }else if(seatNumber.toString().charAt(0) != 'A'||seatNumber.toString().charAt(0) != 'B'||seatNumber.toString().charAt(0) != 'C'||seatNumber.toString().charAt(0) != 'E'){
-            seat="";
-        }else{
-            seat= seatNumber.toString();
+        } else if (seatNumber.toString().charAt(0) != 'A' || seatNumber.toString().charAt(0) != 'B' || seatNumber.toString().charAt(0) != 'C' || seatNumber.toString().charAt(0) != 'E') {
+            seat = "";
+        } else {
+            seat = seatNumber.toString();
         }
-        
+
         PeopleDB.canncelSeat(flight, seat);
 
         JOptionPane.showMessageDialog(this, "Ticket was successfully cancelled", "Cancellation Confirmation", JOptionPane.INFORMATION_MESSAGE);
