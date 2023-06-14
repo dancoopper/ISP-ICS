@@ -492,6 +492,8 @@ public class UI extends JFrame implements ActionListener {
     }
 
     public void DisplayCancellationPlane(){
-            
+          JLabel flightNum = new JLabel("WHAT FLIGHT NUMBER: ");
+
+          PlaneDB.cancel(flightNum.toString());//takes user input from flight number and dellets that flight
     }
 }
