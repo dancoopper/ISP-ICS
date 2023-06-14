@@ -157,7 +157,7 @@ public class UI extends JFrame implements ActionListener {
             manualPan = false;
             ticketCanPan = false;
             flightCanPan = true;
-            DisplayCancellation();
+            DisplayCancellationTicket();
         } else {
             p2.setBackground(Color.WHITE);
             repaint();
@@ -289,6 +289,10 @@ public class UI extends JFrame implements ActionListener {
 
         
        String[] infoArr =  PeopleDB.findFlightInfo(ffield.toString());//this arr is full of all infor for the given flight number it is 80 big 
+        String info = "";
+       for(int i= 0; i<infoArr.length; i++){
+            info = info + infoArr[i];
+       }
     }
 
 
@@ -407,7 +411,6 @@ public class UI extends JFrame implements ActionListener {
      */
     public void DisplayCancellationTicket() {
         //ticket cancel
-        JLabel
         JTextField flightNumber = new JTextField(3);
         
         
@@ -434,5 +437,9 @@ public class UI extends JFrame implements ActionListener {
         }
         
         PeopleDB.canncelSeat(flight, seat);
+    }
+
+    public void DisplayCancellationPlane(){
+            
     }
 }
